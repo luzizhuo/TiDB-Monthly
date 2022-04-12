@@ -1,0 +1,17 @@
+[book]
+authors = ["TiDB Community"]
+language = "zh-CN"
+multilingual = true
+src = "./src"
+title = "TiDB 社区技术月刊"
+
+[preprocessor.index]
+
+[preprocessor.links]
+
+[output.html]
+git-repository-url = "https://github.com/luzizhuo/mdbooktest"
+git-branch = "master"
+
+[output.html.search]
+limit-results = 15
