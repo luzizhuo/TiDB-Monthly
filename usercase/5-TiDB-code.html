@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>TiDB 源码系列之沉浸式编译 TiDB - TiDB 社区技术月刊</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../prefix.html">推荐语</a></li><li class="chapter-item expanded affix "><li class="part-title">产品动态</li><li class="chapter-item expanded "><a href="../product-news/update.html"><strong aria-hidden="true">1.</strong> 产品更新</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../product-news/tidb-6.0.html"><strong aria-hidden="true">1.1.</strong> TiDB 6.0 发版：向企业级云数据库迈进</a></li><li class="chapter-item expanded "><a href="../product-news/tiflash.html"><strong aria-hidden="true">1.2.</strong> TiFlash 开源了</a></li><li class="chapter-item expanded "><a href="../product-news/tiflash-resource.html"><strong aria-hidden="true">1.3.</strong> TiFlash 快速上手资源汇总</a></li></ol></li><li class="chapter-item expanded "><a href="../product-news/bug.html"><strong aria-hidden="true">2.</strong> 产品 Bug 及兼容性问题</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../product-news/tiflash-crash.html"><strong aria-hidden="true">2.1.</strong> TiFlash 在开启了 TLS 的情况下会随机 crash</a></li><li class="chapter-item expanded "><a href="../product-news/tiflash-v5_4_0.html"><strong aria-hidden="true">2.2.</strong> TiFlash 从低版本升级到 v5.4.0 后，元数据丢失，无法响应查询请求</a></li><li class="chapter-item expanded "><a href="../product-news/tikv-nodes.html"><strong aria-hidden="true">2.3.</strong> 由于 Placement Rule 设置不合理导致 TiKV 节点不均衡</a></li></ol></li><li class="chapter-item expanded "><a href="../product-news/development.html"><strong aria-hidden="true">3.</strong> 开发适配</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../product-news/ent-tidb.html"><strong aria-hidden="true">3.1.</strong> Facebook 开源 Golang 实体框架 Ent 现已支持 TiDB</a></li><li class="chapter-item expanded "><a href="../product-news/flink-tidb.html"><strong aria-hidden="true">3.2.</strong> Flink CDC 2.2 正式发布，新增 TiDB 数据源，新增 TiDB CDC 连接器</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">用户实践</li><li class="chapter-item expanded "><a href="../usercase/1-infra-value.html"><strong aria-hidden="true">4.</strong> 黄东旭： 关于基础软件产品价值的思考</a></li><li class="chapter-item expanded "><a href="../usercase/2-inspur-tidb.html"><strong aria-hidden="true">5.</strong> 国产化浪潮下 TiDB 解决的痛点问题</a></li><li class="chapter-item expanded "><a href="../usercase/3-tidb-cluster.html"><strong aria-hidden="true">6.</strong> TiDB集群恢复之TiKV集群不可用</a></li><li class="chapter-item expanded "><a href="../usercase/4-PointGet.html"><strong aria-hidden="true">7.</strong> PointGet 的一生</a></li><li class="chapter-item expanded "><a href="../usercase/5-TiDB-code.html" class="active"><strong aria-hidden="true">8.</strong> TiDB 源码系列之沉浸式编译 TiDB</a></li><li class="chapter-item expanded "><a href="../usercase/6-ctrip-tidb.html"><strong aria-hidden="true">9.</strong> 分布式数据库TiDB在携程的实践</a></li><li class="chapter-item expanded "><a href="../usercase/7-netease-tidb.html"><strong aria-hidden="true">10.</strong> 网易这么牛的迁移方案你学会了吗？</a></li><li class="chapter-item expanded "><a href="../usercase/8-tidb-server-oom.html"><strong aria-hidden="true">11.</strong> TiDB Server 的 OOM 问题优化探索</a></li><li class="chapter-item expanded "><a href="../usercase/9-ccbfintech-chaos.html"><strong aria-hidden="true">12.</strong> 混沌工程在建信金科的应用实践</a></li><li class="chapter-item expanded "><a href="../usercase/10-tuning-hardware.html"><strong aria-hidden="true">13.</strong> 数据库调优之硬件</a></li><li class="chapter-item expanded "><a href="../usercase/11-TiDB-HATP.html"><strong aria-hidden="true">14.</strong> TiDB的HATP对我们来说意味着什么？</a></li><li class="chapter-item expanded "><a href="../usercase/12-TiEM-test.html"><strong aria-hidden="true">15.</strong> TiEM 初体验</a></li><li class="chapter-item expanded affix "><li class="part-title">社区动态</li><li class="chapter-item expanded "><a href="../community-news/event-summary.html"><strong aria-hidden="true">16.</strong> 近期活动预告</a></li><li class="chapter-item expanded "><a href="../community-news/upcoming-event.html"><strong aria-hidden="true">17.</strong> 本月精彩活动回顾</a></li><li class="chapter-item expanded "><a href="../community-news/MVA-202203.html"><strong aria-hidden="true">18.</strong> 3 月社区 MVA（Most Valuable Advocate）</a></li><li class="chapter-item expanded affix "><li class="part-title">TiDB 能力认证</li><li class="chapter-item expanded "><a href="../tidb-certification/pcta-pctp.html"><strong aria-hidden="true">19.</strong> 认证介绍 &amp; 考试安排</a></li><li class="chapter-item expanded "><a href="../tidb-certification/tidb-course.html"><strong aria-hidden="true">20.</strong> TiDB 课程推荐</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">TiDB 社区技术月刊</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/luzizhuo/TiDB-Monthly-202203" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="tidb源码系列之沉浸式编译tidb"><a class="header" href="#tidb源码系列之沉浸式编译tidb">TiDB源码系列之沉浸式编译TiDB</a></h1>
+<p><strong>作者：Jiawei</strong></p>
+<h1 id="1背景"><a class="header" href="#1背景">1.背景</a></h1>
+<p>最近刚学习完PCTP，对TiDB的各种读写有了粗略的了解，但是要想研究的更细节一些的东西， 肯定离不开学习源码，学习源码的话大家可以参考官方的TiDB源码系列文章，但是官方的文章 都是18年发的，可能会有些滞后，所以大家可以参考这个以及结合源码去学。 <code>TiDB源码系列解读文章</code>：[官方源码解读博客地址](https://pingcap.com/zh/blog?tag=TiDB 源码阅读) 然而学习源码肯定编译调试源码是最有效的学习途径，经过这几天的学习，以及请教开发大佬， 成功编译了TiDB，所以分享给对源码感兴趣的小伙伴。</p>
+<h1 id="2准备工具"><a class="header" href="#2准备工具">2.准备工具</a></h1>
+<pre><code>Goland白嫖款一个(30天)` `TiDB 最新款源码tar包一份` `Mac一台
+</code></pre>
+<h1 id="3源码下载"><a class="header" href="#3源码下载">3.源码下载</a></h1>
+<p>1.首先去github上下载源码：<a href="https://github.com/pingcap/tidb/releases">源码下载地址</a> 2.选择自己想要看的版本:这里我以最新的5.4.0版本为例。 <img src="https://img-blog.csdnimg.cn/6c4f38208736416f977fdce0b065d0b7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5riU5LiN5piv6bG8,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /> 3.解压tar包</p>
+<pre><code class="language-bash">#1.打开终端
+#2.到对应目录解压tar包
+tar -xzvf tidb-5.4.0.tar.gz
+#解压后就会得到一个文件夹
+</code></pre>
+<h1 id="4编译软件下载配置"><a class="header" href="#4编译软件下载配置">4.编译软件下载配置</a></h1>
+<p>由于TiDB是使用的go语言编写的，所以我们使用<code>goland</code>进行编译。 1.下载一个30天白嫖版，有能力的可以直接购买付费版(支持正版) 下载地址：<a href="https://www.jetbrains.com/go/download/#section=mac">goland下载地址</a> 选择适合自己的电脑系统的进行下载： <img src="https://img-blog.csdnimg.cn/5dd090e5301044158e0ab41bb9382ba1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5riU5LiN5piv6bG8,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /> 2.安装完成之后选择对应打开的项目。 <img src="https://img-blog.csdnimg.cn/0131bc2e5634404fba14fb2fb98c93a5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5riU5LiN5piv6bG8,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /> 3.找到自己刚才解压的TiDB源码文件夹，打开 <img src="https://img-blog.csdnimg.cn/ae9e745aa8e74ca5a255835af9214d11.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5riU5LiN5piv6bG8,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /> 4.打开后可能会出现很多的报错(如下图)，但是问题不大，基本都是因为没有安装go的相关module导致的。 <img src="https://img-blog.csdnimg.cn/89c22c8f7fc64597b3b99e0ea5528b9c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5riU5LiN5piv6bG8,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /> 所需的gomodule可以在代码中的下面文件看到，可以看到目前都是红色，说明缺少对应的mod。 <img src="https://img-blog.csdnimg.cn/f55b66deea89479980d5e93538ba71ec.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5riU5LiN5piv6bG8,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /></p>
+<p>5.打开goland的设置，然后下载最新版的goroot，就会安装所需的module。 <img src="https://img-blog.csdnimg.cn/7c68b6c1cd594518bd39c1d136cd6476.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5riU5LiN5piv6bG8,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /> 然后选择一个最新的版本下载就好。 <img src="https://img-blog.csdnimg.cn/60ee97bf50ad493ea1f9f09759ee1864.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5riU5LiN5piv6bG8,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /> 然后在下面就会开始下载相关的依赖： <img src="https://img-blog.csdnimg.cn/c45b39f84f254417a328f456230fb585.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5riU5LiN5piv6bG8,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /> 测试的时候发现只会下载一部分，所以剩下的缺少的可以点击图片中的从github sync。 <img src="https://img-blog.csdnimg.cn/1c15b9538dfb4beeb59b0fce9e8ef85e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5riU5LiN5piv6bG8,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /> 下载完成之后就会全部变绿，至此环境我们就配置好了。 <img src="https://img-blog.csdnimg.cn/1bd483f55eaf46af990162af34775219.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5riU5LiN5piv6bG8,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /></p>
+<h1 id="5编译过程"><a class="header" href="#5编译过程">5.编译过程</a></h1>
+<p>经过上面的步骤，基本一切环境已经就绪，接下来我们就可以自己编译TiDB数据库。 1.但是会又有一个问题<code>从哪开始运行？</code> 这里还是要借助我开始说的官方源码系列：<a href="https://pingcap.com/zh/blog/tidb-source-code-reading-2">如何学习TiDB源码</a> 作为一个非专业开发人员，只能借助官网提示去学习。 从我上面的地址，大家可以看到TiDB源码文件对应什么，以及从哪里开始。 <img src="https://img-blog.csdnimg.cn/df1628fd88fb4a83ac69bcb14bfa3473.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5riU5LiN5piv6bG8,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /> 2.从上面我们可以从官方博客知道从tidb-server/main.go运行 首先main.go里面的var就是我们系统的启动参数，大家可以修改对应的参数进行启动 <img src="https://img-blog.csdnimg.cn/89af8e678cf4474db39d16d7c67ac942.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5riU5LiN5piv6bG8,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /></p>
+<p>然后下面找到main函数旁边的绿色按钮，大家可以选择debug模式或者直接运行，这里我选择Debug模式，可以看到更多的信息。 <img src="https://img-blog.csdnimg.cn/164c4c63e5f34fcb930965ace14ed490.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5riU5LiN5piv6bG8,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /> 点击之后需要等待一会儿，屏幕下方会显示compiling.. 编译完之后，大家就可以在debug栏看到对应的信息： 可以看到<code>[INFO] [server.go:246] [&quot;server is running MySQL protocol&quot;] [addr=0.0.0.0:4000]</code>说明启动成功了。 <img src="https://img-blog.csdnimg.cn/e1ab236818534e41bcbf8cbac17c74c6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5riU5LiN5piv6bG8,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /> 3.去访问看看是否真正运行成功。 可以看到TiDB服务已经在运行， 使用MySQL命令行访问TiDB，可以看到已经O K，至此编译完成。 <img src="https://img-blog.csdnimg.cn/56385d0f3b934f508ce581265a5d9f7c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5riU5LiN5piv6bG8,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /></p>
+<h1 id="6最后"><a class="header" href="#6最后">6.最后</a></h1>
+<p>运行成功后，大家后续就可以通过对不同的函数打断点，然后看自己的SQL会调用哪些代码中的哪些函数。函数的位置可以参考官方博客源码解析进行断点测试。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../usercase/4-PointGet.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../usercase/6-ctrip-tidb.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../usercase/4-PointGet.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../usercase/6-ctrip-tidb.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
