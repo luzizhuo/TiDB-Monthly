@@ -10,7 +10,7 @@ title = "TiDB 社区技术月刊"
 [preprocessor.links]
 
 [output.html]
-git-repository-url = "https://github.com/luzizhuo/mdbooktest"
+git-repository-url = "https://github.com/luzizhuo/TiDB-Monthly-202203"
 git-branch = "master"
 
 [output.html.search]
