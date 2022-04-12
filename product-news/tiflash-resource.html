@@ -137,22 +137,45 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="tiflash-开源了"><a class="header" href="#tiflash-开源了">TiFlash 开源了</a></h1>
-<p><img src="https://img1.www.pingcap.com/prod/0_0d85512f2d.jpeg" alt="0.jpeg" /></p>
-<p>TiFlash 终于 <a href="https://github.com/pingcap/tiflash">开源 </a>了，而且不再闭源：<strong>我们选了这个特别的节日开源并做出承诺，希望能显得更加真诚 :)</strong></p>
-<p>PingCAP 一直以来对开源这件事情，是有<strong>信仰</strong>的。这种信仰植根于创始人的情怀，也深深影响了这个旗帜下汇聚的所有人。开源本身并不是一种市场策略：远在我们看清开源到底能带来什么的时候，我们就有了开源的坚持，这也使得我们的开源精神相对<strong>纯粹</strong>。作为 TiDB 社区的一个重要力量，我们和其他社区贡献者一起贡献代码，通过社区用户的使用、打磨，大家共同分享 TiDB 不断进步的红利，没有任何人为障碍和边界。自由和共赢的理念，也是我们对技术对开源的<strong>倔强</strong>。</p>
-<p><img src="https://img1.www.pingcap.com/prod/01_39623260e8.png" alt="01.png" /></p>
-<p><strong>TiDB 是一款 HTAP 分布式数据库，其中提供 HTAP 能力的重要组成部分是 TiFlash</strong>。从原型开发起，由于是一个探索型的项目，一开始我们并没有想好最终形态和架构（TiFlash 在 2018 年也的确经历了一次彻底翻新重做），为了不引起外界太多讨论，我们选择了让 TiFlash 暂时闭源，等大体成型了再开源。虽然从一开始我们就计划开源，但待到真正着手做的时候，我们发现它已经欠下了不少「开源债」，显得和 TiDB 主干格格不入：发布流程没有完全融合，开源所需的文档缺失，编译体验相当糟糕，甚至部分代码风格有些丑陋。要还上这些债务，需要投入相当多的时间和人力。与此同时，产品迭代的压力和有限的资源就成为约束 TiFlash 开源的最大障碍。</p>
-<p>作为将开源当成信仰的团队而言，TiFlash 闭源对我们来说其实是如鲠在喉。因此，虽然仍有诸多缺失，我们选择投入时间逐步还债。毕竟，单独就这个引擎而言，我们也从社区有所取，<strong>无论是 ClickHouse 绝佳的 Runtime 基础，还是诸多社区用户提供的真实场景和改进建议，这些都让 TiFlash 获益无算，可以说没有这些助力，就不会有 TiFlash</strong>。</p>
-<p>TiFlash 首先受益于开源社区的其他项目，除开我们所使用的各类基础库，最重要的部分是：TiFlash 的框架代码是基于 ClickHouse 的。<strong>我们使用 ClickHouse 的方式是将它当做一个单机的 Compute Runtime 和 Server 框架，并复用了 Storage Interface</strong>。针对在线事务数据分析的大目标，我们加入了事务相关逻辑、MPP 能力和可实时更新的列存引擎，引入 Raft 协议和 MySQL 兼容以融入整个 TiDB 体系。很感谢 ClickHouse 为社区提供了一套高性能的计算引擎，对我们而言，一个好的基础大大加速了 TiFlash 的研发进度。<strong>值得一提的是，TiFlash 和 ClickHouse 拥有完全不同的擅长场景：TiFlash 完全偏重于事务性数据的分析，我们也并不希望用户以为 TiFlash 是更好的 ClickHouse</strong>。</p>
-<p>作为一个年轻的引擎，在两年多的时间里，受到天使用户们包容和帮助的同时，我们也通过近距离倾听用户的声音高速迭代改进产品。这一切也反过来帮助用户简化了分析链路的架构，享受实时数据的红利。彼时 TiFlash 虽未开源，却已得到了 TiDB 社区的加持。</p>
-<p>我们清楚地记得，在早期版本时，税务系统的朋友和我们一起测试，尝试优化缴税流程的实时性，虽未成功落地，但让我们对系统设计在真实场景上的得失有了第一手体感，进而直接导致了一次重大重构：我们完全重新设计了存储层，引入了 Raft Learner 作为复制协议，且决定使用 TiDB-Server 作为统一入口而非 TiSpark，这也是大家今日所见的架构；而随着 TiDB 4.0 一起发布的正式版本，则可以说是完全仰赖小红书在发布前数月就提供场景和我们一起探索，而这个尝试最终成功落地电商实时看板场景，让交易数据得以实时展现；待到 5.0，从中通有惊无险却时有毛刺的 618，到流量倍增却平平稳稳的双十一，TiFlash 在高压实时场景的表现得到了提升和验证。而这代表的不仅是全球领先快递公司的核心业务落地，也不仅是数万 TPS 和数十亿订单的实时监控，更是用户的包容，信任和互助。</p>
-<p><img src="https://img1.www.pingcap.com/prod/02_8af891c036.jpeg" alt="02.jpeg" /></p>
-<p><strong>TiFlash 在中通快递</strong></p>
-<p>至今我们都经常会收到客户的私信，说自己某个场景由于 TiFlash 的能力而得到实在的业务收益。每次看到这些可爱的消息，我们都会在团队内分享喜悦。能帮助大家，提供独特的价值，是我们所追求的；与此同时，社区的支持，也是产品发展不可或缺的给养，推动它在更严苛更有价值的场景落地。可以说，没有社区的力量，我们也无法向更多人提供更好的产品。而时至今日，开源则是一个全新的渠道，让 TiFlash 能以更深入的方式和社区互助共赢。</p>
-<p>最后容我们说一句抱歉。虽然开源，但 TiFlash 仍然缺失必要的面向社区的代码解读。关于 TiFlash 和 TiDB HTAP 的架构解析，可以参考我们在 VLDB 2020 发布的论文《 <a href="http://www.vldb.org/pvldb/vol13/p3072-huang.pdf">TiDB: A Raft-based HTAP Database </a>》，或者《 <a href="https://zhuanlan.zhihu.com/p/205663113">TiDB HTAP 深度解读 </a>》、《 <a href="https://pingcap.com/zh/blog/how-tidb-implements-columnar-storage-engine">TiDB 的列式存储引擎是如何实现的？ </a>》文章。社区同学也整理了一份 TiFlash 相关文章的 <a href="https://asktug.com/t/topic/632816">合辑列表 </a>。可惜的是，这些都是基于 TiDB 4.0 版本，当时 TiFlash 仍不具备重要的 MPP 能力。除此之外，源码解析和阅读指南，也仍在缺失状态。这些都将在后续的几个月内陆续补上，以帮助大家阅读和理解 TiFlash。希望关注 TiFlash 的大家在使用以外，借助开源能有更多手段帮助它变得更好，无论是更多的函数，算子支持，更直观的 Tracing 能力，还是更快更稳定的 Delta Tree 列存引擎。</p>
-<p>是的，我们期待你的贡献，因为这份力量将会借助社区的翅膀飞跃令人惊叹的奇景。</p>
-<p>访问 <a href="https://github.com/pingcap/tiflash">GitHub TiFlash </a>仓库，开启你的数据实时分析之旅！</p>
+                        <h1 id="tiflash-快速上手资源合集"><a class="header" href="#tiflash-快速上手资源合集">TiFlash 快速上手资源合集</a></h1>
+<h2 id="解决方案"><a class="header" href="#解决方案">解决方案</a></h2>
+<p><a href="https://pingcap.com/zh/blog/tidb-5.0-htap-architecture-design-and-become-scenario-analysis">成为一栈式数据服务生态： TiDB 5.0 HTAP 架构设计与场景解析 9</a></p>
+<p><a href="https://pingcap.com/zh/insight-detail/real-time-htap-practice-in-financial-industry">《实时数据服务平台 — 金融行业实时 HTAP 场景实践》白皮书 5</a></p>
+<p><a href="https://pingcap.com/zh/solution-detail/tidb-online-t-0-query-solution">TiDB 联机 T + 0 查询解决方案 3</a></p>
+<p><a href="https://pingcap.com/zh/solution-detail/tidb-realtime-warehouse-solution">TiDB 实时数仓解决方案 3</a></p>
+<p><a href="https://pingcap.com/zh/solution-detail/tidb-user-center-solution">TiDB 用户中心解决方案 1</a></p>
+<p><a href="https://pingcap.com/zh/solution-detail/tidb-anti-fraud-solution">TiDB 反欺诈解决方案 4</a></p>
+<p><a href="https://pingcap.com/zh/solution-detail/accounting-engine-based-on-tidb">TiDB 交易与核算分离（会计引擎）解决方案 3</a></p>
+<h2 id="场景案例"><a class="header" href="#场景案例">场景案例</a></h2>
+<p><a href="https://pingcap.com/zh/blog/database-behind-promotion-zto">中通大数据平台在大促中的进化 丨大促背后的 TiDB 2</a></p>
+<p><a href="https://pingcap.com/zh/blog/database-behind-promotion-autohome">数据引擎助力车娱融合新业态 让秒杀狂欢更从容丨大促背后的 TiDB</a></p>
+<p><a href="https://pingcap.com/zh/blog/tidb-enable-new-energy-vehicle-manufacturers?utm_source=special-topic&amp;utm_medium=banner&amp;utm_campaign=new-economy-dtc">造好新能源车需要想象力和技术，卖好新能源车则需要实时分析能力</a></p>
+<p><a href="https://pingcap.com/zh/blog/do-you-have-a-dmall-membership?utm_source=special-topic&amp;utm_medium=banner&amp;utm_campaign=new-economy-dtc">TiDB HTAP 助力多点 DMall “业财一体化” 高效经营 3</a></p>
+<p><a href="https://pingcap.com/zh/case/user-case-leading-catering-enterprise">TiDB x 某世界 500 强餐饮巨头 | “数据平台”的敏捷之旅</a></p>
+<p><a href="https://pingcap.com/zh/case/user-case-ctrip?utm_source=special-topic&amp;utm_medium=banner&amp;utm_campaign=new-economy-dtc">TiDB x 携程 | TiDB 助力携程实时标签处理平台提速</a></p>
+<p><a href="https://pingcap.com/zh/case/user-case-xiaohongshu">TiDB HTAP 助力小红书业务升级</a></p>
+<p><a href="https://pingcap.com/zh/case/user-case-patsnap">TiDB X 智慧芽 | HTAP 为实时数据服务插上翅膀 1</a></p>
+<p><a href="https://pingcap.com/zh/case/user-case-bigo">TiDB x Bigo | 选择 TiFlash 打造高效的实时分析平台 1</a></p>
+<p><a href="https://pingcap.com/zh/case/user-case-huya">TiDB x 虎牙直播 | 从容应对亿级用户游戏直播场景</a></p>
+<p><a href="https://mp.weixin.qq.com/s/Mb_2UarasGG_7507oTdBmA">TiDB 在 eBay丨亿优百倍 ： 商品数据服务 TiDB 性能优化</a></p>
+<p><a href="https://pingcap.com/zh/blog/htap-read-flow-optimization-from-lixiang">理想汽车 HTAP 读流量优化指南丨 TiDB 优化实践 1</a></p>
+<p><a href="https://pingcap.com/zh/blog/database-behind-promotion-yiche">技术升级&amp;行业升级 TiDB 助力易车打造超级汽车狂欢节</a></p>
+<h2 id="用户实践"><a class="header" href="#用户实践">用户实践</a></h2>
+<p><a href="https://tidb.io/blog/94e92326">专栏 - Tiflash 尝鲜小案例 | TiDB 社区 2</a></p>
+<p><a href="https://tidb.io/blog/a898b21e">专栏 - TiFlash运维漫谈 | TiDB 社区 1</a></p>
+<p><a href="https://tidb.io/blog/9da1cede">专栏 - 初探TiDB-TiFlash | TiDB 社区 4</a></p>
+<p><a href="https://tidb.io/blog/e97d3ea0">专栏 - TiDB 4.0 试玩体验–Tiflash | TiDB 社区</a></p>
+<h2 id="性能测评"><a class="header" href="#性能测评">性能测评</a></h2>
+<p><a href="https://tidb.io/blog/dc8e840d">专栏 - TiDB升级、TiFlash测试及对比ClickHouse | TiDB 社区 6</a></p>
+<p><a href="https://tidb.io/blog/3217b5eb">专栏 - TiFlash5.0.1与4.0.10 对比测试 | TiDB 社区</a></p>
+<p><a href="https://tidb.io/blog/b3740d1c">专栏 - TiFlash 5.x 与 4.x 对比测试 | TiDB 社区 2</a></p>
+<p><a href="https://tidb.io/blog/8d93cf4e">专栏 - TPC-H 下 TiFlash 的扩展性测试报告 - v5.1.0 | TiDB 社区</a></p>
+<h2 id="运维实践"><a class="header" href="#运维实践">运维实践</a></h2>
+<p><a href="https://asktug.com/t/topic/68281">TiFlash 常见问题排查 1</a></p>
+<p><a href="https://asktug.com/t/topic/603526">【SOP 系列 24】TiKV/TiFlash 下线慢 1</a></p>
+<p><a href="https://tidb.io/blog/6bb6ec8f">专栏 - TiUP升级TiFlash重启失败解决方案 | TiDB 社区</a></p>
+<h2 id="快来尝鲜-tiflash-吧"><a class="header" href="#快来尝鲜-tiflash-吧">快来尝鲜 TiFlash 吧！</a></h2>
+<p><em>立即下载体验 TiFlash，构建属于你的实时分析引擎</em>：https://github.com/pingcap/tiflash</p>
 
                     </main>
 
