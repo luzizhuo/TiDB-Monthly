@@ -1,6 +1,6 @@
 # Summary
 
-[推荐语](./prefix.md)
+[TiDB 社区技术月刊 - 2022 年 3 月](./prefix.md)
 
 # 产品动态
 - [产品更新](./product-news/update.md)
