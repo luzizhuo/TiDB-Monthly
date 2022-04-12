@@ -36,6 +36,7 @@
 - [近期活动预告](./community-news/event-summary.md)
 - [本月精彩活动回顾](./community-news/upcoming-event.md)
 - [3 月社区 MVA（Most Valuable Advocate）](./community-news/MVA-202203.md)
+- [Contributor 动态](./community-news/contributors.md)
 
 # TiDB 能力认证
 - [认证介绍 & 考试安排](./tidb-certification/pcta-pctp.md)
