@@ -10,10 +10,10 @@
 
 Mdbook 还让社区共创一本书成为了可能，后续我们会在每月月初发布本期月刊的 GitHub 地址，欢迎小伙伴们一起来补充和 review。
 
-
 说回本期月刊，在这一期你会了解 TiDB 6.0 新功能预览，TiFlash 开源等产品最新资讯，以及部分 Bug及兼容性问题解析；本期内容也收录了社区用户在学习和使用 TiDB 等产品中的实践经验，包括携程、网易、建信金科等企业的一手案例。
 
-感谢本期月刊的内容组织：小璐、严琰、周阳
+## 感谢
 
-感谢所有贡献内容的作者：Ruoxi Sun、Yin Su、Yilong Rong、Ed Huang、Bin Bin Yan、Xiaolei Dai、Zhipeng Su、Jiawei Reng、Army、Keira、Rongjun、Zhenxiang Zhang、Tian Zhang、Lu Huang、Qi Luan、Jing Xiao、Xiaogang Xue、Kun Jiang
+感谢所有贡献内容的作者（按文章收录顺序排列）：[Xiaoyu Ma](https://github.com/ilovesoup) 、[Yin Su](https://github.com/Ivy-YinSu) 、[Ruoxi Sun](https://github.com/zanmato1984)、[Yilong Rong](https://github.com/yilongrong)、[Leonard Xu](https://github.com/leonardBang)、[Ed Huang](https://github.com/c4pt0r)、[Binbin Yan](https://tidb.io/u/h5n1/post/all)、[Xiaolei Dai](https://tidb.io/u/%E4%BB%A3%E6%99%93%E7%A3%8A_360/post/all)、[Zhipeng Su](https://tidb.io/u/jansu-dev/post/all)、[Jiawei Reng](https://tidb.net/u/Jiawei/post/all)、Army、Keira、Rongjun、Zhenxiang Zhang、[Tian Zhang](https://tidb.net/u/%E6%95%B0%E6%8D%AE%E5%B0%8F%E9%BB%91/post/all)、Lu Huang、Qi Luan、Jing Xiao、[Xiaogang Xue](https://tidb.net/u/xuexiaogang/post/all)、[Kun Jiang](https://tidb.net/u/pupillord/post/all)
 
+感谢本期月刊的内容组织：[Xiaolu Zhou](https://asktug.com/u/luzizhuo/summary)、[Yan Yan](https://asktug.com/u/yy%E7%A4%BE%E5%8C%BA%E5%B0%8F%E5%B8%AE%E6%89%8B/summary)、[Yang Zhou](https://asktug.com/u/rinka_zhouy/summary)
