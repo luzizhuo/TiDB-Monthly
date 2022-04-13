@@ -1,4 +1,4 @@
-# 本月精彩活动回顾
+# 精彩活动回顾
 
 **[IGG、网易游戏、美图、亚马逊云科技、Datafuse Labs 关于「云原生和出海」的故事](https://asktug.com/t/topic/574627)**
 

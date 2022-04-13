@@ -13,6 +13,7 @@ Mdbook 还让社区共创一本书成为了可能，后续我们会在每月月�
 
 说回本期月刊，在这一期你会了解 TiDB 6.0 新功能预览，TiFlash 开源等产品最新资讯，以及部分 Bug及兼容性问题解析；本期内容也收录了社区用户在学习和使用 TiDB 等产品中的实践经验，包括携程、网易、建信金科等企业的一手案例。
 
-感谢本期月刊的内容组织：YY、小璐、周阳
+感谢本期月刊的内容组织：小璐、严琰、周阳
 
-感谢所有贡献内容的作者：
+感谢所有贡献内容的作者：Ruoxi Sun、Yin Su、Yilong Rong、Ed Huang、Bin Bin Yan、Xiaolei Dai、Zhipeng Su、Jiawei Reng、Army、Keira、Rongjun、Zhenxiang Zhang、Tian Zhang、Lu Huang、Qi Luan、Jing Xiao、Xiaogang Xue、Kun Jiang
+
