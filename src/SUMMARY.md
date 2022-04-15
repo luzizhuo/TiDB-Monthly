@@ -3,9 +3,9 @@
 [TiDB 社区技术月刊](./readme.md)
 
 
-- [2022 年 2 月刊](./tidb-202202/prefix.md)
+- [2022 年 2 月刊](./tidb-202202/202202-prefix.md)
 
-- [2022 年 3 月刊](./tidb-202203/prefix.md)
+- [2022 年 3 月刊](./tidb-202203/202203-prefix.md)
    - [产品更新](./tidb-202203/product-news/update.md)
       - [TiDB 6.0 发版：向企业级云数据库迈进](./tidb-202203/product-news/tidb-6.0.md)
       - [TiFlash 开源了](./tidb-202203/product-news/tiflash.md)
