@@ -1,11 +1,11 @@
 # Summary
 
-[TiDB 社区技术月刊](./prefix.md)
+[TiDB 社区技术月刊](./readme.md)
 
 
-- [2022 年 2 月刊]()
+- [2022 年 2 月刊](./tidb-202202/prefix.md)
 
-- [2022 年 3 月刊]()
+- [2022 年 3 月刊](./tidb-202203/prefix.md)
    - [产品更新](./tidb-202203/product-news/update.md)
       - [TiDB 6.0 发版：向企业级云数据库迈进](./tidb-202203/product-news/tidb-6.0.md)
       - [TiFlash 开源了](./tidb-202203/product-news/tiflash.md)
@@ -34,12 +34,12 @@
       - [TiDB的HATP对我们来说意味着什么？](./tidb-202203/usercase/11-TiDB-HATP.md)
       - [TiEM 初体验](./tidb-202203/usercase/12-TiEM-test.md)
 
-   -[社区动态]()
+   - [社区动态]()
       - [近期活动预告](./tidb-202203/community-news/event-summary.md)
       - [本月精彩活动回顾](./tidb-202203/community-news/upcoming-event.md)
       - [3 月社区 MVA（Most Valuable Advocate）](./tidb-202203/community-news/MVA-202203.md)
       - [Contributor 动态](./tidb-202203/community-news/contributors.md)
 
-   -[TiDB 能力认证]()
+   - [TiDB 能力认证]()
       - [认证介绍 & 考试安排](./tidb-202203/tidb-certification/pcta-pctp.md)
       - [TiDB 课程推荐](./tidb-202203/tidb-certification/tidb-course.md)
