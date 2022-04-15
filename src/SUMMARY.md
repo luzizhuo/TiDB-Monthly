@@ -20,7 +20,7 @@
       - [Facebook 开源 Golang 实体框架 Ent 现已支持 TiDB](./tidb-202203/product-news/ent-tidb.md)
       - [Flink CDC 2.2 正式发布，新增 TiDB 数据源，新增 TiDB CDC 连接器](./tidb-202203/product-news/flink-tidb.md)
 
-   - [用户实践]()
+   - [用户实践](./tidb-202203/usercase/usercase.md)
       - [黄东旭： 关于基础软件产品价值的思考](./tidb-202203/usercase/1-infra-value.md)
       - [国产化浪潮下 TiDB 解决的痛点问题](./tidb-202203/usercase/2-inspur-tidb.md)
       - [TiDB集群恢复之TiKV集群不可用](./tidb-202203/usercase/3-tidb-cluster.md)
@@ -34,12 +34,12 @@
       - [TiDB的HATP对我们来说意味着什么？](./tidb-202203/usercase/11-TiDB-HATP.md)
       - [TiEM 初体验](./tidb-202203/usercase/12-TiEM-test.md)
 
-   - [社区动态]()
+   - [社区动态](./tidb-202203/community-news/community-news.md)
       - [近期活动预告](./tidb-202203/community-news/event-summary.md)
       - [本月精彩活动回顾](./tidb-202203/community-news/upcoming-event.md)
       - [3 月社区 MVA（Most Valuable Advocate）](./tidb-202203/community-news/MVA-202203.md)
       - [Contributor 动态](./tidb-202203/community-news/contributors.md)
 
-   - [TiDB 能力认证]()
+   - [TiDB 能力认证](./tidb-202203/tidb-certification/tidb-certification.md)
       - [认证介绍 & 考试安排](./tidb-202203/tidb-certification/pcta-pctp.md)
       - [TiDB 课程推荐](./tidb-202203/tidb-certification/tidb-course.md)
