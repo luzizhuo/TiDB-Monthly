@@ -1,0 +1,545 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>PointGet 的一生 - TiDB 社区技术月刊</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../prefix.html">TiDB 社区技术月刊</a></li><li class="chapter-item expanded affix "><li class="part-title">介绍</li><li class="chapter-item expanded affix "><li class="part-title">2022 年 2 月刊</li><li class="chapter-item expanded affix "><li class="part-title">2022 年 3 月刊</li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/update.html"><strong aria-hidden="true">1.</strong> 产品更新</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tidb-6.0.html"><strong aria-hidden="true">1.1.</strong> TiDB 6.0 发版：向企业级云数据库迈进</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tiflash.html"><strong aria-hidden="true">1.2.</strong> TiFlash 开源了</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tiflash-resource.html"><strong aria-hidden="true">1.3.</strong> TiFlash 快速上手资源汇总</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/bug.html"><strong aria-hidden="true">2.</strong> 产品 Bug 及兼容性问题</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tiflash-crash.html"><strong aria-hidden="true">2.1.</strong> TiFlash 在开启了 TLS 的情况下会随机 crash</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tiflash-v5_4_0.html"><strong aria-hidden="true">2.2.</strong> TiFlash 从低版本升级到 v5.4.0 后，元数据丢失，无法响应查询请求</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tikv-nodes.html"><strong aria-hidden="true">2.3.</strong> 由于 Placement Rule 设置不合理导致 TiKV 节点不均衡</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/development.html"><strong aria-hidden="true">3.</strong> 开发适配</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/ent-tidb.html"><strong aria-hidden="true">3.1.</strong> Facebook 开源 Golang 实体框架 Ent 现已支持 TiDB</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/flink-tidb.html"><strong aria-hidden="true">3.2.</strong> Flink CDC 2.2 正式发布，新增 TiDB 数据源，新增 TiDB CDC 连接器</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/1-infra-value.html"><strong aria-hidden="true">4.</strong> 黄东旭： 关于基础软件产品价值的思考</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/2-inspur-tidb.html"><strong aria-hidden="true">5.</strong> 国产化浪潮下 TiDB 解决的痛点问题</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/3-tidb-cluster.html"><strong aria-hidden="true">6.</strong> TiDB集群恢复之TiKV集群不可用</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/4-PointGet.html" class="active"><strong aria-hidden="true">7.</strong> PointGet 的一生</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/5-TiDB-code.html"><strong aria-hidden="true">8.</strong> TiDB 源码系列之沉浸式编译 TiDB</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/6-ctrip-tidb.html"><strong aria-hidden="true">9.</strong> 分布式数据库TiDB在携程的实践</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/7-netease-tidb.html"><strong aria-hidden="true">10.</strong> 网易这么牛的迁移方案你学会了吗？</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/8-tidb-server-oom.html"><strong aria-hidden="true">11.</strong> TiDB Server 的 OOM 问题优化探索</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/9-ccbfintech-chaos.html"><strong aria-hidden="true">12.</strong> 混沌工程在建信金科的应用实践</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/10-tuning-hardware.html"><strong aria-hidden="true">13.</strong> 数据库调优之硬件</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/11-TiDB-HATP.html"><strong aria-hidden="true">14.</strong> TiDB的HATP对我们来说意味着什么？</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/12-TiEM-test.html"><strong aria-hidden="true">15.</strong> TiEM 初体验</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/community-news/event-summary.html"><strong aria-hidden="true">16.</strong> 近期活动预告</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/community-news/upcoming-event.html"><strong aria-hidden="true">17.</strong> 本月精彩活动回顾</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/community-news/MVA-202203.html"><strong aria-hidden="true">18.</strong> 3 月社区 MVA（Most Valuable Advocate）</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/community-news/contributors.html"><strong aria-hidden="true">19.</strong> Contributor 动态</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/tidb-certification/pcta-pctp.html"><strong aria-hidden="true">20.</strong> 认证介绍 &amp; 考试安排</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/tidb-certification/tidb-course.html"><strong aria-hidden="true">21.</strong> TiDB 课程推荐</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">TiDB 社区技术月刊</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/luzizhuo/TiDB-Monthly-202203" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="pointget的一生"><a class="header" href="#pointget的一生">PointGet的一生</a></h1>
+<p><strong>作者：jansu-dev</strong> </p>
+<h2 id="一前言"><a class="header" href="#一前言">一、前言</a></h2>
+<p>​    此前，作为 DBA 觉得能看源码是一件很牛的事情，花了<strong>大半年时间</strong>对 Golang 和 Rust 入了个门（<strong>可能入门都不算</strong>），并写了个 Rust 小工具: <a href="https://github.com/jansu-dev/tihc">TiHC(TiDB Healthy Check)</a> 有兴趣的小伙伴可以自取。</p>
+<p>​        期间，看过某些模块，如：<a href="https://asktug.com/t/topic/242808">PD 如何调度 Region</a>，也只是窥探数据库的局部功能，总有一种 <strong>“根本不了解数据库逻辑概念和代码是怎样关联的！”</strong> 的感觉。因此借着 <strong>“点查”</strong> 避开大量复杂优化器代码的机会，尽己所能的串联一下点查在 TiDB 和 TiKV 间的执行流程。</p>
+<p>​        此后，越发觉得 <strong>“产研”</strong> 及 <strong>“交付”</strong> 价值的不同，比如：不能说看代码就很牛，在文档丰富、产品成熟的前提下，<strong>学习文档才是较快速、较全面、较有价值的方法</strong>，更多思考见总结部分。</p>
+<blockquote>
+<p><strong>Tips</strong></p>
+<p>​        1.为防止后续代码重构影响，本次对 TiDB v5.3.0 tidb 和 tikv 进行断点调试。</p>
+<p>​        2.为便于读者理解，在本文首次出现的函数或方法均会给出 Github 锚点链接，重复出现将不再标记 URL 链接。 </p>
+</blockquote>
+<h2 id="二摘要"><a class="header" href="#二摘要">二、摘要</a></h2>
+<p>​    本文主要内容分布在 <strong>“三、点查流程”</strong>，所谓点查，即：执行计划的一种算子，如图所示，详见官网介绍 <a href="https://docs.pingcap.com/zh/tidb/v5.2/explain-indexes#point_get-%E5%92%8C-batch_point_get">Point_Get</a> 。<strong>“3.1 TiDB 部分”<strong>介绍了点查 SQL 在 TiDB 内部流转过程。</strong>“3.2 TiKV 部分”<strong>介绍了点查经由 TiDB 处理并请求给 TiKV 后，如何在 TiKV 内部流转、处理、返回的过程。</strong>“3.3 总结”</strong> 简要介绍了 tidb 点查快的原因。</p>
+<p><img src="https://tidb-blog.oss-cn-beijing.aliyuncs.com/media/image-1646718107346.png" alt="image.png" /></p>
+<p><img src="https://tidb-blog.oss-cn-beijing.aliyuncs.com/media/image-1646718153675.png" alt="image.png" /></p>
+<p>​    每个模块的 “Model Tips” 均会说明该模块在 TIDB 各所属组件中的作用。并且尽力采用分层描述的方式说明，所谓分层，比如：Executor 调用了 PD Client，那么只在 Executor 部分描述那个函数触发调用 PD Client 的逻辑，而不在这一层详述 PD Client 如何工作。</p>
+<p>​    最后，在 <strong>“四、学习总结”</strong> 中，介绍了<strong>个人对 DBA 的看代码行为的价值</strong>的观点。</p>
+<h2 id="三点查流程"><a class="header" href="#三点查流程">三、点查流程</a></h2>
+<h3 id="31-tidb"><a class="header" href="#31-tidb">3.1 TiDB</a></h3>
+<p>​    下述 <strong>3.1</strong> 部分均为点查在 TiDB 组件中涉及处理流程介绍。大致如下图：</p>
+<p>​    <strong>1. 首先</strong>，客户端连接进入 MySQL Protocol Layer 接入 TiDB ，在获取 Token后，传送 SQL 执行；</p>
+<p>​    <strong>2. 其次</strong>，SQL 处理进入 Parser 层，解析成 AST（抽象语法树）；</p>
+<p>​    <strong>3. 再次</strong>，SQL 处理进入 Compile 层，选出 TSO 并将 AST 编译成执行计划；</p>
+<p>​    <strong>4. 然后</strong>，SQL 处理进入 Executor 层<a href="https://github.com/pingcap/tidb/blob/ad9430039f54bb9af78d44831c176bc5eafcbba0/executor/executor.go#L249-L265">（可 “Batch 处理” 的火山模型）</a>，将执行计划 Open、Next、Close 完成 TiKV 数据获取;</p>
+<p>​    <strong>5. 最后</strong>，SQL 处理回到 MySQL Protocol Layer 调用 writeChunks 将 MemBuffer 中数据导出成客户端所需形式返回； </p>
+<p>​    通过追溯 func (cc *clientConn) handleQuery(...) --&gt; func (cc *clientConn) handleStmt(...) --&gt; func (tc *TiDBContext) ExecuteStmt(...) 是串联点查，从解析、编译、执行、协议回显的方法，看懂此函数对于理解全文至关重要。</p>
+<p><img src="https://tidb-blog.oss-cn-beijing.aliyuncs.com/media/image-1646621107730.png" alt="image.png" /></p>
+<p>3.1.1 SQL Protol Deal</p>
+<blockquote>
+<p><strong>Model Tips:</strong></p>
+<p>​    TiDB SQL Protol 处理层仅是 TiDB 为实现 MySQL Protocol 兼容，所做的代码处理。 主要功能包含：监听客户端请求、分发不同 SQL 处理、调用 Parser、Compiler、Executor 完成 SQL 处理，回写结果集等功能。 </p>
+</blockquote>
+<p>​    <strong>1. 首先</strong>，启动 Server 时在 Struct clientConn 内部封装了 go 原生包 net 进行 TCP 通信，并在 for 循环起两个 Listener goroutine 处理客户端发过来的消息。</p>
+<pre><code class="language-go">// Run runs the server.
+func (s *Server) Run() error {
+    go s.startNetworkListener(s.listener, false, errChan)
+    go s.startNetworkListener(s.socket, true, errChan)
+        ......
+}
+
+func (s *Server) startNetworkListener(listener net.Listener, isUnixSocket bool, errChan chan error) {
+    for {
+        conn, err := listener.Accept()
+        ......
+        go s.onConn(clientConn)
+        }
+}
+</code></pre>
+<p>​    <strong>2. 其次</strong>，在 Dispatch 方法中会首先获取 <a href="https://github.com/pingcap/tidb/blob/ad9430039f54bb9af78d44831c176bc5eafcbba0/server/conn.go#L1291">token</a> ，用于限制单个 TiDB Instance 可处理的同时执行请求的 session 个数,详情见: <a href="https://docs.pingcap.com/zh/tidb/v4.0/tidb-configuration-file/#token-limit">token-limit</a>;</p>
+<p>​    <strong>3. 再次</strong>，在 <a href="https://github.com/pingcap/tidb/blob/bc7304c99538643e2464d884da627979cbfddf02/server/conn.go#L172">Struct clientConn</a> 实现了 Run、readPacket、writePacket、handshake、openSession、handleQuery、handleStmt 等等方法，用于实现 <a href="https://dev.mysql.com/doc/internals/en/overview.html">MySQL Client/Server Protocol</a>。本例中，从 MySQL Client 发来的点查 SQL 通过 <a href="https://github.com/pingcap/tidb/blob/ad9430039f54bb9af78d44831c176bc5eafcbba0/server/conn.go#L1237">dispatch 方法</a> 遵照 MySQL Protocol 进入 <a href="https://github.com/pingcap/tidb/blob/ad9430039f54bb9af78d44831c176bc5eafcbba0/server/conn.go#L1341">handleQuery</a> 分支处理；</p>
+<p>​    <strong>4. 然后</strong>，handleQuery 会循环处理 Session 中每一个 SQL，在 handleStmt 中对每一条 SQL 进行解析、编译、执行；</p>
+<p>​    <strong>5. 最后</strong>，在 handleStmt 中调用 writeResultset 方法，触发组织好的 Executor 的 Next() 方法从 TiKV 获取数据； </p>
+<h4 id="312-sql-parser-deal"><a class="header" href="#312-sql-parser-deal">3.1.2 SQL Parser Deal</a></h4>
+<blockquote>
+<p><strong>Model Tips:</strong>    SQL Parser 处理层通过封装 YACC 实现 MySQL 的词法解析，将 SQL 转化为 AST。 </p>
+</blockquote>
+<p>​    <strong>1. 首先</strong>，在 handleQuery 中，调用 <a href="https://github.com/pingcap/tidb/blob/ad9430039f54bb9af78d44831c176bc5eafcbba0/server/conn.go#L1795">func (s *session) Parse(...)</a> 方法实现 AST 的转化与返回；</p>
+<p>​    <strong>2. 其次</strong>，深入了解会发现，该 Parse 方法为调用 <a href="https://github.com/pingcap/tidb/blob/27348d67951c5d9e409c84ca095f0e5d3332c1fd/session/session.go#L1459-L1489">func (s *session) ParseSQL(...)</a> 函数实现真正的词法解析动作，并记录解析 SQL 是否成功及解析耗费的时间。</p>
+<p>​    <strong>3. 最后</strong>，进入 <a href="https://github.com/pingcap/tidb/blob/27348d67951c5d9e409c84ca095f0e5d3332c1fd/session/session.go#L1298-L1318">func (s *session) Parse(...)</a> 首先封装一个 sync.Pool 作为 parserPool 减轻 GC struct 的压力，并 Copy AST 结果返回给上层调用，再深层 DEBUG 将会进入 Parser 模块。 </p>
+<pre><code class="language-go">func (s *session) ParseSQL(ctx context.Context, sql string, params ...parser.ParseParam) ([]ast.StmtNode, []error, error) {
+    ......
+    p := parserPool.Get().(*parser.Parser)
+    defer parserPool.Put(p)
+    p.SetSQLMode(s.sessionVars.SQLMode)
+    p.SetParserConfig(s.sessionVars.BuildParserConfig())
+    tmp, warn, err := p.ParseSQL(sql, params...)
+    res := make([]ast.StmtNode, len(tmp))
+    copy(res, tmp)
+    return res, warn, err
+}
+</code></pre>
+<h4 id="313-sql-compile-deal"><a class="header" href="#313-sql-compile-deal">3.1.3 SQL Compile Deal</a></h4>
+<blockquote>
+<p><strong>Model Tips:</strong></p>
+<p>​        SQL Compiler 处理层完成 SQL 语意检查(Preprocess)、编译执行计划(Logical Optimize、Physical Optimize) 工作，将 SQL 编译成可执行的物理执行计划。 </p>
+</blockquote>
+<p>​    <strong>1. 首先</strong>，从 MySQL Protocol Layer 串联起 “解析”、“执行” 操作，并在 <a href="https://github.com/pingcap/tidb/blob/27348d67951c5d9e409c84ca095f0e5d3332c1fd/session/session.go#L1735">func (s *session) ExecuteStmt(...)</a> 中调用 <a href="https://github.com/pingcap/tidb/blob/27348d67951c5d9e409c84ca095f0e5d3332c1fd/executor/compiler.go#L51-L109">func (c *Compiler) Compile(...)</a> 进行真正的编译处理。</p>
+<p>​        <strong>2. 其次</strong>，在 Compile 内部调用 <a href="https://github.com/pingcap/tidb/blob/27348d67951c5d9e409c84ca095f0e5d3332c1fd/planner/core/preprocess.go#L114-L130">func Preprocess(...)</a>，进行 Preprocess 完成前置检查，如：语义检查。具体实现流程为，通过 AST 的 <a href="https://github.com/pingcap/tidb/blob/27348d67951c5d9e409c84ca095f0e5d3332c1fd/parser/ast/ast.go#L40">Accept 方法</a>, 构造一个 Vistor 实现对 AST 的遍历。 每个 Visitor 接口包含 Enter、Leave 方法，<a href="https://github.com/pingcap/tidb/blob/27348d67951c5d9e409c84ca095f0e5d3332c1fd/planner/core/preprocess.go#L192">并在 Enter 或 Leave 时</a>，依据 SQL 类型进行判断。本例 point get 会跳到 <a href="https://github.com/pingcap/tidb/blob/27348d67951c5d9e409c84ca095f0e5d3332c1fd/parser/ast/dml.go#L1391-L1503">func (n *SelectStmt) Accept(v Visitor)</a> 中，不断分支处理完成遍历。详情参考 <a href="https://www.bilibili.com/video/BV1m4411g7Yy?from=search&amp;seid=10358982920062599002&amp;spm_id_from=333.337.0.0">TiDB 源码阅读之 Compiler --&gt; 进度 10min 左右</a>。</p>
+<p>​        <strong>3. 最后</strong>，进入 Optimizer 处理，本例中因为是点查会越过大量优化器处理过程，直接进入 <a href="https://github.com/pingcap/tidb/blob/27348d67951c5d9e409c84ca095f0e5d3332c1fd/planner/optimize.go#L131">func TryFastPlan(...)</a> 进行简单的 “权限检查” 及 “数据库名检查”。 </p>
+<pre><code class="language-go">func TryFastPlan(ctx sessionctx.Context, node ast.Node) (p Plan) {
+    ......
+    case *ast.SelectStmt:
+        if fp := tryPointGetPlan(ctx, x, isForUpdateReadSelectLock(x.LockInfo)); fp != nil {
+            if checkFastPlanPrivilege(ctx, fp.dbName, fp.TblInfo.Name.L, mysql.SelectPriv) != nil {
+                return nil
+            }
+            if tidbutil.IsMemDB(fp.dbName) {
+                return nil
+            }
+            if fp.IsTableDual {
+                return
+            }
+            p = fp
+            return
+        }
+    }
+    return nil
+}
+</code></pre>
+<h4 id="314-sql-executor-deal"><a class="header" href="#314-sql-executor-deal">3.1.4 SQL Executor Deal</a></h4>
+<blockquote>
+<p><strong>Model Tips:</strong></p>
+<p>​        SQL Executor 通过接收经过 Optimizer 的 Plan，并构造、执行火山模型获取执行结果，火山模型详见 <a href="https://zhuanlan.zhihu.com/p/219516250">知乎 -- SQL 优化之火山模型</a>。 </p>
+</blockquote>
+<p>​    <strong>1. 首先</strong>，在 <a href="https://github.com/pingcap/tidb/blob/ad9430039f54bb9af78d44831c176bc5eafcbba0/session/session.go#L1757">func (s *session) ExecuteStmt(...)</a> 中调用 <a href="https://github.com/pingcap/tidb/blob/ad9430039f54bb9af78d44831c176bc5eafcbba0/session/session.go#L1880">func (a *ExecStmt) Exec(...)</a>，调用 <a href="https://github.com/pingcap/tidb/blob/ad9430039f54bb9af78d44831c176bc5eafcbba0/executor/adapter.go#L407">Open()</a> 方法从而完成 Executor 变异版火山模型的构造，最后返回一个 RecordSet。</p>
+<p>​        <strong>2. 其次</strong>，ExecuteStmt 返回的 RecordSet 包含了 Executor 需要的所有信息，此时可以把 RecordSet 当成返回的结果集，但该执行流从未触发过 Next() 方法，即：没有真正的获取数据。</p>
+<p>​        <strong>3. 最后</strong>，实际上 Next（） 触发由 的 writeResultset 触发,详细流程如下：<strong>func (cc *clientConn) handleStmt(...) --&gt; func (cc *clientConn) writeResultset(...) --&gt; func (cc *clientConn) writeChunks(...) --&gt; func (trs *tidbResultSet) Next(...) --&gt; func (a *recordSet) Next(...) --&gt; func Next(...) --&gt; func (e *PointGetExecutor) Next(...) --&gt; func (e *PointGetExecutor) Next(...) --&gt; func (e *PointGetExecutor) getAndLock(...) --&gt; func (e *PointGetExecutor) get(...)</strong> 层层调用，直至 Executor 完成所有数据的获取。</p>
+<p>​        <strong>4. 另外</strong>，值得一提的是在 func (a *ExecStmt) Exec(...) --&gt; Build Executor 时，因为点查使用“主键”或“唯一索引”标定一行，<strong>不存在重复数据读</strong>，所以在 <code>autoCommit</code> 情况下直接取 <code>MaxUint64</code> 作为事务的 StartTS（该事务只有一个点查），即：无穷大 +∞。同时，还会赋予 <code>PriorityHigh</code> 优先级进行处理，详情见 <a href="https://docs.pingcap.com/zh/tidb/v5.2/tidb-configuration-file/#force-priority">force-priority</a>。 </p>
+<pre><code class="language-go">func (a *ExecStmt) buildExecutor() (Executor, error) {
+        ...... 
+        } else {
+            // Do not sync transaction for Execute statement, because the real optimization work is done in
+            // &quot;ExecuteExec.Build&quot;.
+            useMaxTS, err := plannercore.IsPointGetWithPKOrUniqueKeyByAutoCommit(ctx, a.Plan)
+            if useMaxTS {
+                if err := ctx.InitTxnWithStartTS(math.MaxUint64); err != nil {
+                    return nil, err
+                }
+            }
+            if stmtPri := stmtCtx.Priority; stmtPri == mysql.NoPriority {
+                switch {
+                case useMaxTS:
+                    stmtCtx.Priority = kv.PriorityHigh
+                case a.LowerPriority:
+                    stmtCtx.Priority = kv.PriorityLow
+                }
+            }
+        }
+    }
+    b := newExecutorBuilder(ctx, a.InfoSchema, a.Ti, a.SnapshotTS, a.IsStaleness, a.ReplicaReadScope)
+    e := b.build(a.Plan)
+    return e, nil
+}
+</code></pre>
+<h4 id="315-tikv--pd-client-deal"><a class="header" href="#315-tikv--pd-client-deal">3.1.5 TiKV &amp; PD Client Deal</a></h4>
+<blockquote>
+<p><strong>Model Tips:</strong></p>
+<p>​         TiKV Client 被封装在 TiDB 侧，主要承担从 TiKV 获取 KV 数据的作用。 </p>
+</blockquote>
+<p>​    <strong>1. 首先</strong>，通过执行流追溯 func (s *tikvSnapshot) Get(...) --&gt; func (i *TemporaryTableSnapshotInterceptor) OnGet(...) --&gt; func (s *tikvSnapshot) Get(...) 会直接调用封装了 tikv client 的 tikvSnapshot 结构体的 <a href="https://github.com/pingcap/tidb/blob/cd56aba07e9c9c2a87df5f28fe9d81a3e3dd50a8/store/driver/txn/snapshot.go#L58">Get(...)</a> 方法，从 TiKV 获取 KV 数据。</p>
+<p>​        <strong>2. 其次</strong>，DEBUG 到 TiKV Client 内部细节会发现 TiKV Client 遵照本地缓存是否存在数据，如果不存在构造请求头，并在 for{} 循环中调用 GetRegionCache() 查询 PD Client 的 Region Cache 获取所要查询 Region 在 TiKV 中的位置，向 TiKV 发送请求获取数据。之所以使用 for 循环，是因为 Region Cache 信息从 PD 获取，所以并不一定是最新的、最准确的 Region Location 信息，包含一些错误重拾操作,如：EpochNotMatch 等等，详情见: <a href="https://docs.google.com/document/d/1BHkeN8W2iWSdgWLK3U16QGwq9K7DA6Le7zxVhLPaQgc/edit">Region Cache 缓存和清理逻辑解释</a> 或 <a href="https://pingcap.com/zh/blog/tidb-source-code-reading-18">TiDB 源码阅读系列文章（十八）tikv-client（上）</a>。 </p>
+<pre><code class="language-go">func (s *KVSnapshot) get(ctx context.Context, bo *retry.Backoffer, k []byte) ([]byte, error) {
+    // Check the cached values first.
+    s.mu.RLock()
+    if s.mu.cached != nil {
+        if value, ok := s.mu.cached[string(k)]; ok {
+            atomic.AddInt64(&amp;s.mu.hitCnt, 1)
+            s.mu.RUnlock()
+            return value, nil
+        }
+    }
+    s.mu.RUnlock()
+    ......
+    s.mu.RLock()
+    req := tikvrpc.NewReplicaReadRequest(tikvrpc.CmdGet,
+        &amp;kvrpcpb.GetRequest{
+            Key:     k,
+            Version: s.version,
+        }, s.mu.replicaRead, &amp;s.replicaReadSeed, kvrpcpb.Context{
+            Priority:         s.priority.ToPB(),
+            NotFillCache:     s.notFillCache,
+            TaskId:           s.mu.taskID,
+            ResourceGroupTag: s.resourceGroupTag,
+        })
+    s.mu.RUnlock()
+
+    for {
+        loc, err := s.store.GetRegionCache().LocateKey(bo, k)
+        resp, _, _, err := cli.SendReqCtx(bo, req, loc.Region, client.ReadTimeoutShort, tikvrpc.TiKV, &quot;&quot;, ops...)
+        regionErr, err := resp.GetRegionError()
+        val := cmdGetResp.GetValue()
+        return val, nil
+    }
+}
+</code></pre>
+<p>​     <strong>3. 最后</strong>，在 <a href="https://github.com/pingcap/tidb/blob/ad9430039f54bb9af78d44831c176bc5eafcbba0/executor/point_get.go#L215">func (e *PointGetExecutor) Next(...)</a> 处理中会通过 <code>isCommonHandleRead</code> 是普通查询还是点查，点查 executor 会直接 get 该 key 的 value。由于 TiDB KV 主要作用是对 TiKV 数据获取处理的封装，便不单独提取模块赘述。</p>
+<pre><code class="language-go">func (e *PointGetExecutor) Next(ctx context.Context, req *chunk.Chunk) error {
+    if e.idxInfo != nil {
+        if isCommonHandleRead(e.tblInfo, e.idxInfo) {
+            handleBytes, err := EncodeUniqueIndexValuesForKey(e.ctx, e.tblInfo, e.idxInfo, e.idxVals)
+            e.handle, err = kv.NewCommonHandle(handleBytes)
+        } else {
+            e.idxKey, err = EncodeUniqueIndexKey(e.ctx, e.tblInfo, e.idxInfo, e.idxVals, tblID)
+            e.handleVal, err = e.get(ctx, e.idxKey)
+        }
+    }
+    ......
+    return nil
+} 
+</code></pre>
+<h2 id="32tikv"><a class="header" href="#32tikv">3.2TiKV</a></h2>
+<p>下述 <strong>3.2</strong> 部分均为点查在 TiKV 组件中涉及处理流程介绍。</p>
+<p><img src="https://tidb-blog.oss-cn-beijing.aliyuncs.com/media/image-1646621186551.png" alt="image.png" /></p>
+<h4 id="321-kv-grpc--service-deal"><a class="header" href="#321-kv-grpc--service-deal">3.2.1 KV Grpc &amp; Service Deal</a></h4>
+<p>​    <strong>1. 首先</strong>，TiKV 进程启动后，所有的 Grpc 请求处理都由 Service 层接管。位于 <code>src/server/service/kv.rs</code> 文件中，例如本次的点查请求会由 <a href="https://github.com/tikv/tikv/blob/005efd56d3405b72a26bf623b5895cf3d9da0a6f/src/server/service/kv.rs#L196"><code>handle_request!(kv_get, future_get, GetRequest, GetResponse);</code></a> 这样一个声明宏处理，调用 future_get 异步处理。</p>
+<p>​        <strong>2. 其次</strong>，从 Grpc 的请求中解析出 key 等相关信息，作为参数传递调用存储引擎方法 <a href="https://github.com/tikv/tikv/blob/005efd56d3405b72a26bf623b5895cf3d9da0a6f/src/server/service/kv.rs#L1302-L1305">storage.get(...)</a> 进行实际的调用处理,包含构造 snapshot、获取 value 等。</p>
+<p>​        <strong>5. 最后</strong>，在 v(value) 异步结果获取后，构造 Grpc 返回给请求端。 </p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn future_get&lt;E: Engine, L: LockManager&gt;(
+    storage: &amp;Storage&lt;E, L&gt;,
+    mut req: GetRequest,
+) -&gt; impl Future&lt;Output = ServerResult&lt;GetResponse&gt;&gt; {
+
+    let v = storage.get(
+        req.take_context(),
+        Key::from_raw(req.get_key()),
+        req.get_version().into(),
+    );
+
+    async move {
+        let mut resp = GetResponse::default();
+            match v {
+                Ok((val, stats)) =&gt; {
+                    match val {
+                        Some(val) =&gt; resp.set_value(val),
+                        None =&gt; resp.set_not_found(true),
+                    }
+                }
+                Err(e) =&gt; resp.set_error(extract_key_error(&amp;e)),
+            }
+        Ok(resp)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4 id="322-kv-storage-readpool-deal"><a class="header" href="#322-kv-storage-readpool-deal">3.2.2 KV Storage ReadPool Deal</a></h4>
+<p>​    <strong>1. 首先</strong>，该函数的作用是从 snapshot 中，搜寻满足 “数据行提交时间戳 &lt; 本次数据行发起请求时间戳” 要求的，无锁的，且 MVCC 多版本数据中时间戳最新的请求行数据 。</p>
+<p>​        <strong>2. 其次</strong>，观察函数逻辑，先会对请求的优先级进行判断，然后从 read_pool 线程池中 spawn 一个 handle，并为该 handle 指定解析出来的 “优先级” 在存储层执行请求，关于 SQL 优先级详见 --&gt; <a href="https://docs.pingcap.com/zh/tidb/stable/tidb-configuration-file#force-priority">force-priority 说明</a>。</p>
+<p>​        <strong>3. 再次</strong>，prepare_snap_ctx(...) 会进行内存锁冲突检查，并基于 key、start_ts 等信息构造 snapshot context。</p>
+<p>​        <strong>4. 然后</strong>，通过传入 snap_ctx ,在 <a href="https://github.com/tikv/tikv/blob/005efd56d3405b72a26bf623b5895cf3d9da0a6f/src/storage/mod.rs#L566"><code>let snapshot = Self::with_tls_engine(|engine| Self::snapshot(engine, snap_ctx)).await?;</code></a> 步构造出存储引擎的 snapshot。</p>
+<p>​        <strong>5. 最后</strong>，并在 <a href="https://github.com/tikv/tikv/blob/005efd56d3405b72a26bf623b5895cf3d9da0a6f/src/storage/mod.rs#L581-L588"><code>let result = snap_store.get(&amp;key, &amp;mut statistics)});</code></a> 中获取 result 结果。 </p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn get(
+        &amp;self,
+        mut ctx: Context,
+        key: Key,
+        start_ts: TimeStamp,
+    ) -&gt; impl Future&lt;Output = Result&lt;(Option&lt;Value&gt;, KvGetStatistics)&gt;&gt; {
+
+        let priority = ctx.get_priority();
+
+        let res = self.read_pool.spawn_handle(
+            async move {
+
+                let snap_ctx = prepare_snap_ctx(
+                    &amp;ctx,
+                    iter::once(&amp;key),
+                    start_ts,
+                    &amp;bypass_locks,
+                    &amp;concurrency_manager,
+                    CMD,
+                )?;
+                let snapshot = Self::with_tls_engine(|engine| Self::snapshot(engine, snap_ctx)).await?;
+                {
+                    let snap_store = SnapshotStore::new(
+                        snapshot,
+                        start_ts,
+                        ctx.get_isolation_level(),
+                        !ctx.get_not_fill_cache(),
+                        bypass_locks,
+                        access_locks,
+                        false,
+                    );
+                    let result = snap_store.get(&amp;key, &amp;mut statistics)});
+
+                    Ok((
+                        result?,
+                        KvGetStatistics {
+                            stats: statistics,
+                            perf_stats: delta,
+                            latency_stats,
+                        },
+                    ))
+                }
+            }
+            .in_resource_metering_tag(resource_tag),
+            priority,
+            thread_rng().next_u64(),
+        );
+    }
+<span class="boring">}
+</span></code></pre></pre>
+<h4 id="323-kv-rocksdb-snapshot-deal"><a class="header" href="#323-kv-rocksdb-snapshot-deal">3.2.3 KV RocksDB Snapshot Deal</a></h4>
+<p>​    <strong>1. 首先</strong>，<strong>从 3.2.2 第 4 步构造 snapshot 部分深入</strong>，仔细 DEBUG 会发现构造 snapshot 之前 <a href="https://github.com/tikv/tikv/blob/005efd56d3405b72a26bf623b5895cf3d9da0a6f/src/server/raftkv.rs#L420">fn async_snapshot(...)</a> 会发起 ReadIndex ，判断此时 leader 是否真的是 leader 。早期 Read Index 是通过发送一次心跳的方式实现的，<a href="https://pingcap.com/zh/blog/lease-read">关于 read index 详情参考 --&gt; TiKV 功能介绍 - Lease Read</a>。随后 TiKV 引入 Lease Read 优化，<a href="https://pingcap.com/zh/blog/tikv-source-code-reading-19">具体概念及由来参考 --&gt; read index 和 local read 情景分析</a>，关于本例点查 Lease Read 部分逻辑在 <a href="https://github.com/tikv/tikv/blob/005efd56d3405b72a26bf623b5895cf3d9da0a6f/components/raftstore/src/store/worker/read.rs#L606-L689">pub fn propose_raft_command</a> 函数下。</p>
+<p>​        <strong>2. 其次</strong>，<strong>从 3.2.2 第 5 步构造 snap_store.get(...) 部分深入</strong>，对于点查会构造一个 point_getter ，再 get 对应 value,大概逻辑是通过事务的隔离级别分支处理（现阶段所有请求均是 SI 隔离界别）。在 SI 分支中，针对该 User Key 扫一遍 lock CF ,详情参见代码 --&gt; <a href="https://github.com/tikv/tikv/blob/005efd56d3405b72a26bf623b5895cf3d9da0a6f/src/storage/mvcc/reader/point_getter.rs#L202-L210"><code>impl PointGetter</code></a>； 因为自动提交的点查使用 max_ts，所以这一步会返回空，意味着查询最新的已提交的 Default CF 数据即可。</p>
+<p>​        <strong>3. 最后</strong>，排除锁信息后，进入 load_data(user_key) 会起一个 loop ，构造一个包含 cursor 的WriteRef 不断的扫 Write CF。因为事务提交后，会在 Write CF 中写一个 key 为 {user_key}{commit_ts}，value 为 {type}{start_ts} 的记录，所以扫 PUT 类型的 Write CF 意味着可以判断出：查询的数据是否存在 Write CF 中，因为 <a href="https://pingcap.com/zh/blog/tikv-source-code-reading-13">MVCC 数据读取</a> 指出小于 64 字节的数据会直接内嵌在 Lock Info 或 Write Info，否则调用 load_data_from_default_cf(...) 从 Default CF 中获取查询的结果值。 </p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn load_data(&amp;mut self, user_key: &amp;Key) -&gt; Result&lt;Option&lt;Value&gt;&gt; {
+
+        loop {
+            let write = WriteRef::parse(self.write_cursor.value(&amp;mut self.statistics.write))?;
+
+            match write.write_type {
+                WriteType::Put =&gt; {
+                    match write.short_value {
+                        Some(value) =&gt; {
+                            // Value is carried in `write`.
+                            self.statistics.processed_size += user_key.len() + value.len();
+                            println!(&quot;-short--&gt;{}&lt;---&quot;,String::from_utf8_lossy(value));
+                            return Ok(Some(value.to_vec()));
+                        }
+                        None =&gt; {
+                            let start_ts = write.start_ts;
+                            let value = self.load_data_from_default_cf(start_ts, user_key)?;
+                            println!(&quot;-default--&gt;{:?}&lt;---&quot;,String::from_utf8_lossy(&amp;value));
+                            self.statistics.processed_size += user_key.len() + value.len();
+                            return Ok(Some(value));
+                        }
+                    }
+                }
+            }
+
+            if !self.write_cursor.next(&amp;mut self.statistics.write) {
+                return Ok(None);
+            }
+        }
+    }
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="33-总结"><a class="header" href="#33-总结">3.3 总结</a></h3>
+<p>​    简单来说，主要是点查直接可基于唯一 Key 定位所需 value，查询数据较少，又不用走二级索引回表定位数据。其次 PointGet 跳过了大量优化器的规则优化，直接走了 FastPlan 节省了优化器部分的时间。最后，使得点查成为一个效率较高的执行计划。</p>
+<h2 id="四学习总结"><a class="header" href="#四学习总结">四、学习总结</a></h2>
+<h3 id="41-看源码条件"><a class="header" href="#41-看源码条件">4.1 看源码条件</a></h3>
+<p>​    <strong>首先</strong>，需要清楚看源码的目的，本人作为一个 DBA 出于想了解数据库产品的角度出发，觉得满足如下几点基本就可以开始看源码了。1、2 点是基础，3 点是保持看代码的动力源泉、高效方法。 </p>
+<ol>
+<li>了解基本编程语言语法、语言特性、周边组件，如：rust future、rust 所有权、go gpm、go mod、cargo、Makefile ...... 等等； </li>
+<li>掌握数据库组件功能、流程、概念，如：解析、编译、执行、火山模型、向量模型、存储模型 ...... 等等； </li>
+<li>保持持续探索的热情，多与社区及相关爱好者交流，终有一天不懂得模块会被看懂。</li>
+</ol>
+<p>​    <strong>最后</strong>，其实光看代码很多逻辑思想是看不出来的，需结合官网的文章、作者所讲述概念、行业经验才能看出来，否则代码之间跳来跳去很容易迷失方向。</p>
+<h3 id="42-看代码价值"><a class="header" href="#42-看代码价值">4.2 看代码价值</a></h3>
+<p>​    <strong>首先</strong>，个人觉得看代码的行为对不同角色带来的价值是不同的，比如： </p>
+<pre><code>1. 作为数据库内核开发角色，看数据库代码是基本技能，日常工作中了解不同产品特性 ...    
+   2. 作为 DBA 角色，可以看到更多逻辑概念下的细节,尤其是在产品较不成熟（文档好少、BUG 较多、最佳实践较少）的情况下，在遇到问题时，进一步深入细节发现解决问题的新思路 ...   
+   3. 作为应用开发角色，可以发现代码实现手段上的“黑科技”，更好依据不同数据库特性、用好不同数据库产品 ... 
+</code></pre>
+<p>​    <strong>其次</strong>，谈到价值，个人觉得不可忽略的是 <strong>“投入产出比”</strong>。增加这一衡量因素后，不禁如下疑问从脑中产生： </p>
+<pre><code>1. 该行为如果只是觉得很牛，这件事是否真的值得做？如果做了，可能只是为了满足内心对于某件事的好奇，说明是根本没有衡量该行为的价值,属于冲动行为的结果。当然结果可能是好的，也可能是坏的。   
+   2.  该行为对 DBA 角色来讲，带来的收益到底有多大？代码看的多可能对逻辑概念、产品特性认知的更准确、牢固，可是这种老牢固与阅读故障案例相比，在同等时间投入下获得的收益 “谁胜谁负” 恐怕是个问号❓。再者，真出现了产品问题，没有产品作者的支持与确认我真的敢改代码、或者下定论吗？    
+   3. 行业 或 企业对于 DBA 角色的阅读代码技能是怎样定位的？涉及代码问题处理的工作大可以由专业的人负责，专业的人做专业的事效率可能更高效些。如果假设该前提是正确的，那么 DBA 阅读代码无疑是一种低效的行为。  
+   4. 如果为了构建自己写代码的能力，为什么不去做研发？
+</code></pre>
+<p>​    <strong>最后</strong>，上述种种问题现在我只能提出，而不能回答，也没有资格回答，本人也在不断探索、学习、抉择中 ... ，也可能这件事情没有一个绝对的答案。</p>
+<p>​    总结下来，本片文章在 TiDB 产品层面描述了数据库逻辑概念下，点查行为和代码实现的关联关系，可以进一步提高作者对产品的认知。在看代码学习行为层面，简述了个人对该行为所带来价值多少的衡量。也许，这是本文啰唆表达下所能带来的 2 点 <strong>“仅有的”</strong> 价值。</p>
+<h2 id="五引用"><a class="header" href="#五引用">五、引用</a></h2>
+<p><a href="https://pingcap.com/zh/blog/tidb-source-code-reading-2">TiDB Blog -- TiDB 源码阅读系列文章（二）初识 TiDB 源码</a></p>
+<p><a href="https://pingcap.com/zh/blog/tidb-source-code-reading-13">TiDB Blog -- TiDB 源码阅读系列文章（十三）索引范围计算简介</a></p>
+<p><a href="https://pingcap.com/zh/blog/tidb-source-code-reading-3">TiDB Blog -- TiDB 源码阅读系列文章（三）SQL 的一生</a></p>
+<p><a href="https://pingcap.com/zh/blog/tikv-source-code-reading-19">TiDB Blog -- TiKV 源码解析系列文章（十九）read index 和 local read 情景分析</a></p>
+<p><a href="https://pingcap.com/zh/blog/lease-read">TiDB Blog -- TiKV 功能介绍 - Lease Read</a></p>
+<p><a href="https://pingcap.com/zh/blog/tikv-source-code-reading-13">TiDB Blog -- TiKV 源码解析系列文章（十三）MVCC 数据读取</a></p>
+<p><a href="https://pingcap.com/zh/blog/tidb-source-code-reading-18">TiDB Blog -- TiDB 源码阅读系列文章（十八）tikv-client（上）</a></p>
+<p><a href="http://blog.minifish.org/posts/tidb1/">Jack Yu Blog -- 如何阅读 TiDB 的源代码（一）</a></p>
+<p><a href="https://asktug.com/t/topic/183125">Jan Su Blog -- TiDB run and debug on M1</a></p>
+<p><a href="https://dev.mysql.com/doc/internals/en/overview.html">MySQL Doc -- MySQL Client/Server Protocol</a></p>
+<p><a href="https://www.cnblogs.com/davygeek/p/5647175.html">MySQL Doc -- MySQL协议分析</a></p>
+<p><a href="https://www.bilibili.com/video/BV1m4411g7Yy?from=search&amp;seid=5392094730229995526&amp;spm_id_from=333.337.0.0">Talkgo movie -- TiDB 源码阅读之 Compiler【有彩蛋哦】【 Go 夜读 】</a></p>
+<p><a href="https://asktug.com/t/topic/513044/2">AskTUG Req -- tidb sql 执行</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/35195328">Zhihu Blog -- RocksDB事务实现TransactionDB分析</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/219516250">Zhihu Blog -- SQL 优化之火山模型</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../tidb-202203/usercase/3-tidb-cluster.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../../tidb-202203/usercase/5-TiDB-code.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../tidb-202203/usercase/3-tidb-cluster.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../../tidb-202203/usercase/5-TiDB-code.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
