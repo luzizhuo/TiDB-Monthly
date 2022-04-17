@@ -1,0 +1,265 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>诊断 SOP | TiKV/TiFlash 下线慢 - TiDB 社区技术月刊</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../index.html">TiDB 社区技术月刊</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/prefix-feb.html"><strong aria-hidden="true">1.</strong> 2022 年 2 月刊</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202202/failure-analysis/failure-analysis.html"><strong aria-hidden="true">1.1.</strong> 故障解读</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202202/failure-analysis/1-br.html"><strong aria-hidden="true">1.1.1.</strong> v5.3.0 - BR 备份报错并且耗时比升级前更长(v2)</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/failure-analysis/2-ticdc.html"><strong aria-hidden="true">1.1.2.</strong> v5.1.2 - TiCDC 不同步，checkpointTs 不推进</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/failure-analysis/3-tiflash-sql.html"><strong aria-hidden="true">1.1.3.</strong> v5.1.1 - 调整变量 tidb_isolation_read_engines 影响 tiflash SQL 执行计划</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202202/usercase/usercase.html"><strong aria-hidden="true">1.2.</strong> 技术分享</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202202/usercase/1-tikv.html" class="active"><strong aria-hidden="true">1.2.1.</strong> 诊断 SOP | TiKV/TiFlash 下线慢</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/usercase/2-sop-gc.html"><strong aria-hidden="true">1.2.2.</strong> 诊断 SOP | GC 相关问题排查</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/usercase/3-tidb-lightning.html"><strong aria-hidden="true">1.2.3.</strong> 最佳实践 | tidb-lightning 使用 tidb-backend 模式导入优化</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/usercase/4-region-cache.html"><strong aria-hidden="true">1.2.4.</strong> 原理解读 | Region Cache 缓存和清理逻辑解释</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202202/product-news/update.html"><strong aria-hidden="true">1.3.</strong> TiDB 产品资讯</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202202/product-news/1-roadmap.html"><strong aria-hidden="true">1.3.1.</strong> 发版计划</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/product-news/2-bug.html"><strong aria-hidden="true">1.3.2.</strong> 严重 Bug 及兼容性问题</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202202/community-news/community-news.html"><strong aria-hidden="true">1.4.</strong> TiDB 社区动态</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202202/community-news/1-mva.html"><strong aria-hidden="true">1.4.1.</strong> 2 月 MOA/MVA</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/community-news/2-tidb-certification.html"><strong aria-hidden="true">1.4.2.</strong> TiDB 能力认证</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/prefix-mar.html"><strong aria-hidden="true">2.</strong> 2022 年 3 月刊</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/update.html"><strong aria-hidden="true">2.1.</strong> 产品更新</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tidb-6.0.html"><strong aria-hidden="true">2.1.1.</strong> TiDB 6.0 发版：向企业级云数据库迈进</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tiflash.html"><strong aria-hidden="true">2.1.2.</strong> TiFlash 开源了</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tiflash-resource.html"><strong aria-hidden="true">2.1.3.</strong> TiFlash 快速上手资源汇总</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/bug.html"><strong aria-hidden="true">2.2.</strong> 产品 Bug 及兼容性问题</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tiflash-crash.html"><strong aria-hidden="true">2.2.1.</strong> TiFlash 在开启了 TLS 的情况下会随机 crash</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tiflash-v5_4_0.html"><strong aria-hidden="true">2.2.2.</strong> TiFlash 从低版本升级到 v5.4.0 后，元数据丢失，无法响应查询请求</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tikv-nodes.html"><strong aria-hidden="true">2.2.3.</strong> 由于 Placement Rule 设置不合理导致 TiKV 节点不均衡</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/development.html"><strong aria-hidden="true">2.3.</strong> 开发适配</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/ent-tidb.html"><strong aria-hidden="true">2.3.1.</strong> Facebook 开源 Golang 实体框架 Ent 现已支持 TiDB</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/flink-tidb.html"><strong aria-hidden="true">2.3.2.</strong> Flink CDC 2.2 正式发布，新增 TiDB 数据源，新增 TiDB CDC 连接器</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/usercase.html"><strong aria-hidden="true">2.4.</strong> 用户实践</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/1-infra-value.html"><strong aria-hidden="true">2.4.1.</strong> 黄东旭： 关于基础软件产品价值的思考</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/2-inspur-tidb.html"><strong aria-hidden="true">2.4.2.</strong> 国产化浪潮下 TiDB 解决的痛点问题</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/3-tidb-cluster.html"><strong aria-hidden="true">2.4.3.</strong> TiDB集群恢复之TiKV集群不可用</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/4-PointGet.html"><strong aria-hidden="true">2.4.4.</strong> PointGet 的一生</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/5-TiDB-code.html"><strong aria-hidden="true">2.4.5.</strong> TiDB 源码系列之沉浸式编译 TiDB</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/6-ctrip-tidb.html"><strong aria-hidden="true">2.4.6.</strong> 分布式数据库TiDB在携程的实践</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/7-netease-tidb.html"><strong aria-hidden="true">2.4.7.</strong> 网易这么牛的迁移方案你学会了吗？</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/8-tidb-server-oom.html"><strong aria-hidden="true">2.4.8.</strong> TiDB Server 的 OOM 问题优化探索</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/9-ccbfintech-chaos.html"><strong aria-hidden="true">2.4.9.</strong> 混沌工程在建信金科的应用实践</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/10-tuning-hardware.html"><strong aria-hidden="true">2.4.10.</strong> 数据库调优之硬件</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/11-TiDB-HATP.html"><strong aria-hidden="true">2.4.11.</strong> TiDB的HATP对我们来说意味着什么？</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/12-TiEM-test.html"><strong aria-hidden="true">2.4.12.</strong> TiEM 初体验</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/community-news/community-news.html"><strong aria-hidden="true">2.5.</strong> 社区动态</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/community-news/event-summary.html"><strong aria-hidden="true">2.5.1.</strong> 近期活动预告</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/community-news/upcoming-event.html"><strong aria-hidden="true">2.5.2.</strong> 本月精彩活动回顾</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/community-news/MVA-202203.html"><strong aria-hidden="true">2.5.3.</strong> 3 月社区 MVA（Most Valuable Advocate）</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/community-news/contributors.html"><strong aria-hidden="true">2.5.4.</strong> Contributor 动态</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/tidb-certification/tidb-certification.html"><strong aria-hidden="true">2.6.</strong> TiDB 能力认证</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/tidb-certification/pcta-pctp.html"><strong aria-hidden="true">2.6.1.</strong> 认证介绍 &amp; 考试安排</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/tidb-certification/tidb-course.html"><strong aria-hidden="true">2.6.2.</strong> TiDB 课程推荐</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">TiDB 社区技术月刊</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/luzizhuo/TiDB-Monthly-202203" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="诊断-sop--tikvtiflash-下线慢"><a class="header" href="#诊断-sop--tikvtiflash-下线慢">诊断 SOP | TiKV/TiFlash 下线慢</a></h1>
+<h2 id="作者介绍"><a class="header" href="#作者介绍">作者介绍</a></h2>
+<p>耿海直，TiDB 内核研发，主要负责 PD 调度相关组件的设计，研发工作</p>
+<h2 id="术语列表"><a class="header" href="#术语列表"><strong>术语列表</strong></a></h2>
+<ul>
+<li>
+<p>Store：指代 TiKV 或 TiFlash 实例</p>
+</li>
+<li>
+<p>Region：TiDB 进行数据存储的基本单位，代表了一段范围内的二进制数据，默认一个 Region 的大小为 96 MB</p>
+</li>
+<li>
+<p>Leader：Region 通过 Raft 共识算法在不同 Store 之间完成满足线性一致性的复制，从而达成数据上的冗余以备高可用，过程中的任意时刻一个 Region 可能是四个角色中的一种：leader，follower，candidate 和 learner。其中大多数情况下由 Region leader 负责对外提供读写服务；follower 负则同步数据，以便当 leader 宕机时随时顶替成为新的 leader 对外服务</p>
+</li>
+</ul>
+<h2 id="下线流程概述"><a class="header" href="#下线流程概述"><strong>下线流程概述</strong></a></h2>
+<p>TiKV 和 TiFlash 的下线是异步的，整个过程会分为多个环节，大致流程如下：</p>
+<ol>
+<li>使用 tiup cluster scale-in 命令通过 PD API 开始下线流程，此操作仅是一个 “触发开关”，API 成功返回仅代表<strong>开始下线</strong>。</li>
+<li>PD 在通过 API 收到下线请求后，会触发下线流程，首先会将对应的 Store 的状态从 <strong>Up —&gt; Offline</strong>。</li>
+<li>对应的 Store 在状态变为 Offline 后，会开始：
+<ol>
+<li>将其上的 leader 转移到其他 Store（Evict leader，由 TiUP 手动添加）</li>
+<li>将其上的 Region 转移到其他 Store</li>
+</ol>
+</li>
+<li>在当前 Store 的 Region 全部被驱逐完毕后，PD 会将对应 Store 的状态从 <strong>Offline —&gt; Tombstone</strong>。</li>
+<li>过程中可以使用 tiup cluster display 命令查看下线节点的状态，等待其变为 Tombstone。</li>
+<li>使用 tiup cluster prune 命令清理 Tombstone 节点，该命令会执行以下操作：
+<ol>
+<li>停止已经下线掉的节点的服务</li>
+<li>清理已经下线掉的节点的相关数据文件</li>
+<li>更新集群的拓扑，移除已经下线掉的节点</li>
+</ol>
+</li>
+</ol>
+<p>其中，步骤 3 受数据量影响，耗时一般会比较久，因为系统中会同时运行有其他的调度任务从而产生竞争，比如下线迁移的 Scheduler 要和 Region balance scheduler 抢占资源，导致下线速度慢或 Balance 速度上不去。</p>
+<h2 id="常见操作"><a class="header" href="#常见操作"><strong>常见操作</strong></a></h2>
+<p>上述为一次正常的，没有任何例外的下线流程，实际情况中可能遇到各种各样的额外情况。对于不同的情况，我们也会有各种各样的“工具”去应对。下面会列举一些我们可能会进行的有用操作。</p>
+<ul>
+<li>待下线节点已经宕机</li>
+</ul>
+<p>在某些情况下，有可能被缩容的节点宿主机已经宕机，导致无法通过 SSH 连接到节点进行操作，这个时候可以通过给缩容命令加上 <a href="https://docs.pingcap.com/zh/tidb/stable/tiup-component-cluster-scale-in#--force">--force</a> 选项强制将其从集群中移除。强制移除 TiKV 节点不会等待数据调度，移除一个以上正在提供服务的 TiKV 节点会有数据丢失的风险。</p>
+<ul>
+<li>加速下线</li>
+</ul>
+<p>如前所述，下线 Store 会先将其上的 leader 和 Region 迁移至其他 Store，而这个迁移的过程本质上也是调度行为，所以会和系统中的其他调度任务产生冲突，如果下线是当务之急，可以通过<a href="https://docs.pingcap.com/zh/tidb/stable/pd-scheduling-best-practices#%E8%8A%82%E7%82%B9%E4%B8%8B%E7%BA%BF%E9%80%9F%E5%BA%A6%E6%85%A2">调整 PD 的相关参数来加速下线调度</a> ，当然这样修改可能会对集群状态产生扰动，所以需要在修改前评估权衡集群对外服务和下线任务的轻重缓急。</p>
+<ul>
+<li>终止下线</li>
+</ul>
+<p>根据下线流程，触发一个 Store 的下线操作本质上是将其 Store 状态设置成 Offline，所以如果我们想在其状态变为 Tombstone 之前终止下线操作，可以通过 PD API 进行设置，把对应 Store 的状态改回 Up</p>
+<pre><code class="language-Bash">curl -X POST http://{pd_address}:{pd_port}/pd/api/v1/store/{store_id}/state\?state=Up
+</code></pre>
+<h2 id="案例汇总"><a class="header" href="#案例汇总"><strong>案例汇总</strong></a></h2>
+<ul>
+<li>案例一：下线过程未等调度完成就使用 API 强行设置 Store 为 Tombstone 并 delete store</li>
+</ul>
+<p>根据下线流程概述我们可以得知，下线的过程中对于 PD 来说，一个 Store 的状态有两次转变，一次是 Up 到 Offline，一次是 Offline 到 Tombstone，前者代表着一次下线的开始，后者代表着一次下线的结束。正常情况下，只有前者是需要我们或客户手动触发的，即下线的开始是我们进行操作的，而后者是由 PD 通过收集检查 Store 信息自动进行处理的。然而在实际使用中，存在人为地将未下线完成 Store 状态设置成 Tombstone 的情况（最新版本已经不允许通过 API 手动将 Store 的状态设置为 Tombstone，详见：<a href="https://github.com/tikv/pd/pull/3407">tikv/pd#3407</a> ）。</p>
+<p>在一个 Store 被正常的设为 Tombstone 并 delete 前，至少两个事情是需要被保证的</p>
+<ul>
+<li>
+<p>其上已经没有任何 Region leader，亦即它不会对外提供服务</p>
+</li>
+<li>
+<p>其上已经没有任何 Region 副本，亦即它不会提供多余的副本冗余</p>
+</li>
+</ul>
+<p>然而不等下线完成，手动强制地将一个节点设置为 Tombstone 并移除则会打破上述约束，一个直接的表现就是会有 Region 残留在这个 Store 上，而与此同时 PD 已经不再存有该 Store 的信息。这会造成这些 Region 始终把该 Store 当成它的所在地之一，从而把相关信息残留到了 Region 的元信息里。这可能会导致以下问题：</p>
+<ul>
+<li>
+<p>Region 上报给 PD 的信息里面会有一个对 PD 来说并不存在的 Store</p>
+</li>
+<li>
+<p>PD 试图通过调度清除这个不存在 Store 上的 peer 却迟迟得不到回应</p>
+</li>
+<li>
+<p>TiDB 可能通过 Region 里残留的 Store 信息错误地发送请求</p>
+</li>
+</ul>
+<p>一般遇到这种情况，需要我们手动的添加 operator 来告诉 Region 应该 “忘记” 这个不存在的 Store 信息，可以通过 pd-ctl 来生成移除 Store 信息的脚本，注意，使用这个方法前需要留意是否删除后 Region 的可用副本会低于多数：</p>
+<pre><code class="language-Markdown">pd-ctl region --jq=&quot;.regions[] | {id: .id, peer_stores: [.peers[].store_id] | select(any(.=={store_id}))  } | .id&quot; | awk '{if($0!=&quot;&quot;){print &quot;pd-ctl operator add remove-peer&quot;,$0,&quot;{store_id}&quot;}}'
+</code></pre>
+<p>或者</p>
+<pre><code class="language-Markdown">pd-ctl region --jq=&quot;.regions[] | {id: .id, peer_stores: [.peers[].store_id] | select(any(.=={store_id})) | select(length&gt;1) } | .id&quot; | sed -e &quot;s/^/pd-ctl operator add remove-peer /&quot; | sed -e &quot;s/$/ {store_id}/&quot;
+</code></pre>
+<p>还有一个方法，但是由于需要停机所有 TiKV，并不推荐使用：<a href="https://docs.pingcap.com/zh/tidb/stable/tikv-control#%E5%BC%BA%E5%88%B6-region-%E4%BB%8E%E5%A4%9A%E5%89%AF%E6%9C%AC%E5%A4%B1%E8%B4%A5%E7%8A%B6%E6%80%81%E6%81%A2%E5%A4%8D%E6%9C%8D%E5%8A%A1">强制 Region 从多副本失败状态恢复服务</a> </p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../tidb-202202/usercase/usercase.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../../tidb-202202/usercase/2-sop-gc.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../tidb-202202/usercase/usercase.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../../tidb-202202/usercase/2-sop-gc.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

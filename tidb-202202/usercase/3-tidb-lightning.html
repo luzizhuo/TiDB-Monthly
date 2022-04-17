@@ -1,0 +1,217 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>最佳实践 | tidb-lightning 使用 tidb-backend 模式导入优化 - TiDB 社区技术月刊</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../index.html">TiDB 社区技术月刊</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/prefix-feb.html"><strong aria-hidden="true">1.</strong> 2022 年 2 月刊</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202202/failure-analysis/failure-analysis.html"><strong aria-hidden="true">1.1.</strong> 故障解读</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202202/failure-analysis/1-br.html"><strong aria-hidden="true">1.1.1.</strong> v5.3.0 - BR 备份报错并且耗时比升级前更长(v2)</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/failure-analysis/2-ticdc.html"><strong aria-hidden="true">1.1.2.</strong> v5.1.2 - TiCDC 不同步，checkpointTs 不推进</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/failure-analysis/3-tiflash-sql.html"><strong aria-hidden="true">1.1.3.</strong> v5.1.1 - 调整变量 tidb_isolation_read_engines 影响 tiflash SQL 执行计划</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202202/usercase/usercase.html"><strong aria-hidden="true">1.2.</strong> 技术分享</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202202/usercase/1-tikv.html"><strong aria-hidden="true">1.2.1.</strong> 诊断 SOP | TiKV/TiFlash 下线慢</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/usercase/2-sop-gc.html"><strong aria-hidden="true">1.2.2.</strong> 诊断 SOP | GC 相关问题排查</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/usercase/3-tidb-lightning.html" class="active"><strong aria-hidden="true">1.2.3.</strong> 最佳实践 | tidb-lightning 使用 tidb-backend 模式导入优化</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/usercase/4-region-cache.html"><strong aria-hidden="true">1.2.4.</strong> 原理解读 | Region Cache 缓存和清理逻辑解释</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202202/product-news/update.html"><strong aria-hidden="true">1.3.</strong> TiDB 产品资讯</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202202/product-news/1-roadmap.html"><strong aria-hidden="true">1.3.1.</strong> 发版计划</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/product-news/2-bug.html"><strong aria-hidden="true">1.3.2.</strong> 严重 Bug 及兼容性问题</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202202/community-news/community-news.html"><strong aria-hidden="true">1.4.</strong> TiDB 社区动态</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202202/community-news/1-mva.html"><strong aria-hidden="true">1.4.1.</strong> 2 月 MOA/MVA</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/community-news/2-tidb-certification.html"><strong aria-hidden="true">1.4.2.</strong> TiDB 能力认证</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/prefix-mar.html"><strong aria-hidden="true">2.</strong> 2022 年 3 月刊</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/update.html"><strong aria-hidden="true">2.1.</strong> 产品更新</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tidb-6.0.html"><strong aria-hidden="true">2.1.1.</strong> TiDB 6.0 发版：向企业级云数据库迈进</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tiflash.html"><strong aria-hidden="true">2.1.2.</strong> TiFlash 开源了</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tiflash-resource.html"><strong aria-hidden="true">2.1.3.</strong> TiFlash 快速上手资源汇总</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/bug.html"><strong aria-hidden="true">2.2.</strong> 产品 Bug 及兼容性问题</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tiflash-crash.html"><strong aria-hidden="true">2.2.1.</strong> TiFlash 在开启了 TLS 的情况下会随机 crash</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tiflash-v5_4_0.html"><strong aria-hidden="true">2.2.2.</strong> TiFlash 从低版本升级到 v5.4.0 后，元数据丢失，无法响应查询请求</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tikv-nodes.html"><strong aria-hidden="true">2.2.3.</strong> 由于 Placement Rule 设置不合理导致 TiKV 节点不均衡</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/development.html"><strong aria-hidden="true">2.3.</strong> 开发适配</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/ent-tidb.html"><strong aria-hidden="true">2.3.1.</strong> Facebook 开源 Golang 实体框架 Ent 现已支持 TiDB</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/flink-tidb.html"><strong aria-hidden="true">2.3.2.</strong> Flink CDC 2.2 正式发布，新增 TiDB 数据源，新增 TiDB CDC 连接器</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/usercase.html"><strong aria-hidden="true">2.4.</strong> 用户实践</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/1-infra-value.html"><strong aria-hidden="true">2.4.1.</strong> 黄东旭： 关于基础软件产品价值的思考</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/2-inspur-tidb.html"><strong aria-hidden="true">2.4.2.</strong> 国产化浪潮下 TiDB 解决的痛点问题</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/3-tidb-cluster.html"><strong aria-hidden="true">2.4.3.</strong> TiDB集群恢复之TiKV集群不可用</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/4-PointGet.html"><strong aria-hidden="true">2.4.4.</strong> PointGet 的一生</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/5-TiDB-code.html"><strong aria-hidden="true">2.4.5.</strong> TiDB 源码系列之沉浸式编译 TiDB</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/6-ctrip-tidb.html"><strong aria-hidden="true">2.4.6.</strong> 分布式数据库TiDB在携程的实践</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/7-netease-tidb.html"><strong aria-hidden="true">2.4.7.</strong> 网易这么牛的迁移方案你学会了吗？</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/8-tidb-server-oom.html"><strong aria-hidden="true">2.4.8.</strong> TiDB Server 的 OOM 问题优化探索</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/9-ccbfintech-chaos.html"><strong aria-hidden="true">2.4.9.</strong> 混沌工程在建信金科的应用实践</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/10-tuning-hardware.html"><strong aria-hidden="true">2.4.10.</strong> 数据库调优之硬件</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/11-TiDB-HATP.html"><strong aria-hidden="true">2.4.11.</strong> TiDB的HATP对我们来说意味着什么？</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/12-TiEM-test.html"><strong aria-hidden="true">2.4.12.</strong> TiEM 初体验</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/community-news/community-news.html"><strong aria-hidden="true">2.5.</strong> 社区动态</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/community-news/event-summary.html"><strong aria-hidden="true">2.5.1.</strong> 近期活动预告</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/community-news/upcoming-event.html"><strong aria-hidden="true">2.5.2.</strong> 本月精彩活动回顾</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/community-news/MVA-202203.html"><strong aria-hidden="true">2.5.3.</strong> 3 月社区 MVA（Most Valuable Advocate）</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/community-news/contributors.html"><strong aria-hidden="true">2.5.4.</strong> Contributor 动态</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/tidb-certification/tidb-certification.html"><strong aria-hidden="true">2.6.</strong> TiDB 能力认证</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/tidb-certification/pcta-pctp.html"><strong aria-hidden="true">2.6.1.</strong> 认证介绍 &amp; 考试安排</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/tidb-certification/tidb-course.html"><strong aria-hidden="true">2.6.2.</strong> TiDB 课程推荐</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">TiDB 社区技术月刊</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/luzizhuo/TiDB-Monthly-202203" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="最佳实践--tidb-lightning-使用-tidb-backend-模式导入优化"><a class="header" href="#最佳实践--tidb-lightning-使用-tidb-backend-模式导入优化">最佳实践 | tidb-lightning 使用 tidb-backend 模式导入优化</a></h1>
+<h2 id="作者介绍"><a class="header" href="#作者介绍">作者介绍</a></h2>
+<p>苏志鹏，TiDB DBA，TUG 2021 年度 MVA，拥有丰富的运维与交付经验，对相关数据库的原理及应用有浓厚兴趣</p>
+<h2 id="项目背景"><a class="header" href="#项目背景"><strong>项目背景</strong></a></h2>
+<p>近日，一个主 AP 业务项目 MyCat 下迁 TIDB 迁移，原分库分表架构（16 台 server） AP 大 SQL 普遍需 2 小时跑出结果，POC 实测（5 台 server）该类 SQL 调优后 TiDB 下 20 分钟内均能出结果，能获得近乎 5 倍下迁收益。</p>
+<h2 id="问题描述"><a class="header" href="#问题描述"><strong>问题描述</strong></a></h2>
+<p>原有业务场景中，需每月定期往数据库以 LOAD LOCAL FILE 的方式导入约 1 亿左右宽表数据，但原有方式测下来，TiDB 的 LOAD 耗时约 8 小时，刨除 POC 性能没有生产好等原因，也是运维人员不可接受的。</p>
+<p>因为 TiDB AP SQL 上的优化，业务方也有了加速数据更新的想法，即：将 LOAD 数据周期从每月改为每周。如果该这个问题无法解决，该方案基本无法改变。</p>
+<p>因项目原因在低于 TiDB 官网硬件标准的 非 SSD 磁盘又测了一版结果，测试过程中暴露出 LOAD LOCAL FILE 当时导入数据无法保证原子性导入的问题。具体表现为由于 TiKV 写入过慢报错 LockNotFound 事务锁被清除，<a href="https://docs.pingcap.com/zh/tidb/dev/troubleshoot-lock-conflicts#%E9%94%81%E8%A2%AB%E6%B8%85%E9%99%A4-locknotfound-%E9%94%99%E8%AF%AF">详情参考官网解释</a>，但该场景中，可能出现 LOAD 进去 5 千万数据导入失败，此时需要反向 Delete 掉已导入的数据，代价极高，即使分批 del 也很难判定本次导入了哪些数据，无很好方式业务实现方法。</p>
+<p>总结问题点：</p>
+<ol>
+<li>TiDB 同 MySQL 用 LOAD 方式导入 csv 文件过慢</li>
+<li>LOAD 方式导入数据无法保证原子性导入</li>
+</ol>
+<h2 id="分析原因"><a class="header" href="#分析原因"><strong>分析原因</strong></a></h2>
+<ol>
+<li>导入过慢的原因是 LOAD 是单线程方式工作，没有利用并发多线程导入加速。</li>
+<li>LOAD 走的是 batch insert 接口，默认会将 csv 文件切分为多份、构成多个小事务提交。(注意 : MySQL 的实现也是 batch insert，所以理论上也存在该风险)</li>
+</ol>
+<h2 id="解决方案"><a class="header" href="#解决方案"><strong>解决方案</strong></a></h2>
+<p>断点续传：利用 Lightning 的断点续传功能保证原子性导入， 具体原理：假设切分成了 50 个 csv 文件，lightning 导入某种原因中途断掉，所有 lightning 线程停止工作，重启后会基于 check_point 读出表信息、排序目录、taskid（关键），可以顺着 taskid 继续下一个 task 完成断点续传，实现最终一致；</p>
+<p>加速导入：导入前 Shell 脚本拆分 csv 文件为多份，配合 lightning 参数 region-concurrency, 该参数默认表示 CPU 实际占用核数，默认 100% 占用。其实一旦拆分文件超过该值已经无意义了，并没有加速上的优化意义。（注意：但可以依据日志中打印的文件号，推断导入进度，其实认为 mysql client count 也可以实现同样目的）</p>
+<p>脚本共享：虽然 tidb-lightning 自身存在切分文件为 256M 的功能，但要求 strict-format = true。因为该项目数据由 Teradata 上导出，且受限企业 csv 文件规范要求无法更改，所以我为该项目做了个处理脚本取名 <a href="https://github.com/jansu-dev/TiChange_for_lightning">TiChange_for_lightning</a> 希望能帮到大家，具体使用参考 README！</p>
+<p>注意：:warning: 该工具除格式转换外，仅对 tidb-backend 模式导入速度进行优化，其他模式（importer、local）并无速度上优化。</p>
+<p>Plain Text</p>
+<pre><code class="language-Plain%20Text">./TiChange_for_lightning.sh 
+Auther : jan su
+Introduce : TiChange_for_lightning 是一个能让你快速将csv文件适配 tidb-lightning csv 文件格式要求的工具，如有任何 BUG 请及时反馈，作者将及时修复！ 
+
+Usage: TiChange_for_lightning.sh [option] [parameter]
+option: -i --input-file [input_csv_path] | | 需要处理的csv文件路径;
+        -o --operate-path [operate_dir_path] | | 需要处理csv文件的，空间足够的文件夹路径;
+        -m --schema-meta [schema_meta] | | 需要指定库中 csv 文件所属对象信息，eg: -m schema_name.table_name;
+        -s --separator_import [separator_import_format] |(default: ',' )| 需要指定当前 csv 文件字段分隔符，eg: -s '||' TiChange 自动将其转换为 &quot;,&quot; : &quot;A&quot;||&quot;B&quot; --&gt; &quot;A&quot;,&quot;B&quot; ;
+        -d --delimiter_import [delimiter_import_format] |(default: '&quot;' )| 需要指定当前 csv 文件引用定界符，eg: -d '' TiChange 自动将其转换为 '&quot;' : ABC --&gt; &quot;ABC&quot; ;
+        -n --null_import [null_import_format] |(default: '\N')| 需要指定解析 csv 文件中字段值为 NULL 的字符， eg: '\N' 导入 TiDB 中会被解析为 NULL ;
+        -h --help | | 获取关于 TiChange.sh 的操作指引，详细 Demo 请参考 ： https://github.com/jansu-dev/TiChange_for_lightning ;
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../tidb-202202/usercase/2-sop-gc.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../../tidb-202202/usercase/4-region-cache.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../tidb-202202/usercase/2-sop-gc.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../../tidb-202202/usercase/4-region-cache.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

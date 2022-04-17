@@ -1,0 +1,305 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>v5.3.0 - BR 备份报错并且耗时比升级前更长(v2) - TiDB 社区技术月刊</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../index.html">TiDB 社区技术月刊</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/prefix-feb.html"><strong aria-hidden="true">1.</strong> 2022 年 2 月刊</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202202/failure-analysis/failure-analysis.html"><strong aria-hidden="true">1.1.</strong> 故障解读</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202202/failure-analysis/1-br.html" class="active"><strong aria-hidden="true">1.1.1.</strong> v5.3.0 - BR 备份报错并且耗时比升级前更长(v2)</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/failure-analysis/2-ticdc.html"><strong aria-hidden="true">1.1.2.</strong> v5.1.2 - TiCDC 不同步，checkpointTs 不推进</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/failure-analysis/3-tiflash-sql.html"><strong aria-hidden="true">1.1.3.</strong> v5.1.1 - 调整变量 tidb_isolation_read_engines 影响 tiflash SQL 执行计划</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202202/usercase/usercase.html"><strong aria-hidden="true">1.2.</strong> 技术分享</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202202/usercase/1-tikv.html"><strong aria-hidden="true">1.2.1.</strong> 诊断 SOP | TiKV/TiFlash 下线慢</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/usercase/2-sop-gc.html"><strong aria-hidden="true">1.2.2.</strong> 诊断 SOP | GC 相关问题排查</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/usercase/3-tidb-lightning.html"><strong aria-hidden="true">1.2.3.</strong> 最佳实践 | tidb-lightning 使用 tidb-backend 模式导入优化</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/usercase/4-region-cache.html"><strong aria-hidden="true">1.2.4.</strong> 原理解读 | Region Cache 缓存和清理逻辑解释</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202202/product-news/update.html"><strong aria-hidden="true">1.3.</strong> TiDB 产品资讯</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202202/product-news/1-roadmap.html"><strong aria-hidden="true">1.3.1.</strong> 发版计划</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/product-news/2-bug.html"><strong aria-hidden="true">1.3.2.</strong> 严重 Bug 及兼容性问题</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202202/community-news/community-news.html"><strong aria-hidden="true">1.4.</strong> TiDB 社区动态</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202202/community-news/1-mva.html"><strong aria-hidden="true">1.4.1.</strong> 2 月 MOA/MVA</a></li><li class="chapter-item expanded "><a href="../../tidb-202202/community-news/2-tidb-certification.html"><strong aria-hidden="true">1.4.2.</strong> TiDB 能力认证</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/prefix-mar.html"><strong aria-hidden="true">2.</strong> 2022 年 3 月刊</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/update.html"><strong aria-hidden="true">2.1.</strong> 产品更新</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tidb-6.0.html"><strong aria-hidden="true">2.1.1.</strong> TiDB 6.0 发版：向企业级云数据库迈进</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tiflash.html"><strong aria-hidden="true">2.1.2.</strong> TiFlash 开源了</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tiflash-resource.html"><strong aria-hidden="true">2.1.3.</strong> TiFlash 快速上手资源汇总</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/bug.html"><strong aria-hidden="true">2.2.</strong> 产品 Bug 及兼容性问题</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tiflash-crash.html"><strong aria-hidden="true">2.2.1.</strong> TiFlash 在开启了 TLS 的情况下会随机 crash</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tiflash-v5_4_0.html"><strong aria-hidden="true">2.2.2.</strong> TiFlash 从低版本升级到 v5.4.0 后，元数据丢失，无法响应查询请求</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/tikv-nodes.html"><strong aria-hidden="true">2.2.3.</strong> 由于 Placement Rule 设置不合理导致 TiKV 节点不均衡</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/development.html"><strong aria-hidden="true">2.3.</strong> 开发适配</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/ent-tidb.html"><strong aria-hidden="true">2.3.1.</strong> Facebook 开源 Golang 实体框架 Ent 现已支持 TiDB</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/product-news/flink-tidb.html"><strong aria-hidden="true">2.3.2.</strong> Flink CDC 2.2 正式发布，新增 TiDB 数据源，新增 TiDB CDC 连接器</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/usercase.html"><strong aria-hidden="true">2.4.</strong> 用户实践</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/1-infra-value.html"><strong aria-hidden="true">2.4.1.</strong> 黄东旭： 关于基础软件产品价值的思考</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/2-inspur-tidb.html"><strong aria-hidden="true">2.4.2.</strong> 国产化浪潮下 TiDB 解决的痛点问题</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/3-tidb-cluster.html"><strong aria-hidden="true">2.4.3.</strong> TiDB集群恢复之TiKV集群不可用</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/4-PointGet.html"><strong aria-hidden="true">2.4.4.</strong> PointGet 的一生</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/5-TiDB-code.html"><strong aria-hidden="true">2.4.5.</strong> TiDB 源码系列之沉浸式编译 TiDB</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/6-ctrip-tidb.html"><strong aria-hidden="true">2.4.6.</strong> 分布式数据库TiDB在携程的实践</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/7-netease-tidb.html"><strong aria-hidden="true">2.4.7.</strong> 网易这么牛的迁移方案你学会了吗？</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/8-tidb-server-oom.html"><strong aria-hidden="true">2.4.8.</strong> TiDB Server 的 OOM 问题优化探索</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/9-ccbfintech-chaos.html"><strong aria-hidden="true">2.4.9.</strong> 混沌工程在建信金科的应用实践</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/10-tuning-hardware.html"><strong aria-hidden="true">2.4.10.</strong> 数据库调优之硬件</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/11-TiDB-HATP.html"><strong aria-hidden="true">2.4.11.</strong> TiDB的HATP对我们来说意味着什么？</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/usercase/12-TiEM-test.html"><strong aria-hidden="true">2.4.12.</strong> TiEM 初体验</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/community-news/community-news.html"><strong aria-hidden="true">2.5.</strong> 社区动态</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/community-news/event-summary.html"><strong aria-hidden="true">2.5.1.</strong> 近期活动预告</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/community-news/upcoming-event.html"><strong aria-hidden="true">2.5.2.</strong> 本月精彩活动回顾</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/community-news/MVA-202203.html"><strong aria-hidden="true">2.5.3.</strong> 3 月社区 MVA（Most Valuable Advocate）</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/community-news/contributors.html"><strong aria-hidden="true">2.5.4.</strong> Contributor 动态</a></li></ol></li><li class="chapter-item expanded "><a href="../../tidb-202203/tidb-certification/tidb-certification.html"><strong aria-hidden="true">2.6.</strong> TiDB 能力认证</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tidb-202203/tidb-certification/pcta-pctp.html"><strong aria-hidden="true">2.6.1.</strong> 认证介绍 &amp; 考试安排</a></li><li class="chapter-item expanded "><a href="../../tidb-202203/tidb-certification/tidb-course.html"><strong aria-hidden="true">2.6.2.</strong> TiDB 课程推荐</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">TiDB 社区技术月刊</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/luzizhuo/TiDB-Monthly-202203" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="故障解读v530-br-备份报错并且耗时比升级前更长"><a class="header" href="#故障解读v530-br-备份报错并且耗时比升级前更长">【故障解读】v5.3.0 BR 备份报错并且耗时比升级前更长</a></h1>
+<h2 id="作者介绍"><a class="header" href="#作者介绍">作者介绍</a></h2>
+<p>靳献旗，汽车之家 DBA，TUG 2021 年度 MVA，主要负责 MySQL、TiDB、MongoDB 的架构设计、性能调优、日常运维以及自动化平台开发工作。</p>
+<h2 id="问题背景"><a class="header" href="#问题背景">问题背景</a></h2>
+<p>集群版本：v5.3.0</p>
+<p>BR  版本：v5.3.0</p>
+<p>备份命令如下：</p>
+<pre><code class="language-SQL">br backup full --pd &quot;${pd_string}&quot; -s &quot;local://${bakDir}&quot; --ratelimit 200 --log-file backup_full.log
+</code></pre>
+<p>集群 (v4.0.10) 和 BR (v4.0.4) 统一 升级到 5.3.0 版本后，BR 出现三个问题:</p>
+<ul>
+<li>BR 日志有报错信息</li>
+</ul>
+<p>BR 日志末尾虽然显示备份成功(日志信息类似 Full backup success summary)，但是日志中包含如下报错信息：</p>
+<pre><code class="language-SQL">[2021/12/31 03:31:47.084 +08:00] [ERROR] [client.go:752] [&quot;[pd] fetch pending tso requests error&quot;] [dc-location=global] [error=&quot;[PD:client:ErrClientGetTSO]context canceled: context canceled&quot;] [stack=&quot;github.com/tikv/pd/client.(*client).handleDispatcher\n\t/nfs/cache/mod/github.com/tikv/pd@v1.1.0-beta.0.20211104095303-69c86d05d379/client/client.go:752&quot;]
+</code></pre>
+<ul>
+<li>BR 日志显示备份文件大幅减小</li>
+</ul>
+<p>升级前备份文件大小：total size(MB): 4200646.35</p>
+<p>升级后备份文件大小：total-kv-size=2.321TB</p>
+<ul>
+<li>BR 备份耗时增加一倍多</li>
+</ul>
+<p>备份耗时增加一倍多，升级前备份耗时不足 2 个小时，升级后耗时高达 5 个半小时。</p>
+<h2 id="问题分析"><a class="header" href="#问题分析">问题分析</a></h2>
+<p>从 BR 备份日志入手分析问题的原因。</p>
+<p>升级前 BR (v4.0.4 )备份日志</p>
+<pre><code class="language-SQL">[2021/12/12 23:22:01.612 +08:00] [INFO] [version.go:33] [&quot;Welcome to Backup &amp; Restore (BR)&quot;]
+[2021/12/12 23:22:01.612 +08:00] [INFO] [version.go:34] [BR] [release-version=v4.0.4]
+[2021/12/12 23:22:01.612 +08:00] [INFO] [version.go:35] [BR] [git-hash=c91c79a8431805dcbfda2c7b2612dde6985e564c]
+[2021/12/12 23:22:01.612 +08:00] [INFO] [version.go:36] [BR] [git-branch=heads/refs/tags/v4.0.4]
+[2021/12/12 23:22:01.612 +08:00] [INFO] [version.go:37] [BR] [go-version=go1.13]
+[2021/12/12 23:22:01.612 +08:00] [INFO] [version.go:38] [BR] [utc-build-time=&quot;2020-07-31 07:33:17&quot;]
+[2021/12/12 23:22:01.612 +08:00] [INFO] [version.go:39] [BR] [race-enabled=false]
+......
+[2021/12/13 01:12:12.107 +08:00] [INFO] [client.go:196] [&quot;save backup meta&quot;] [path=local:///dbbak/tidbFullBak/mg_tidb_full_20211212232201] [size=24088950][2021/12/13 01:12:13.021 +08:00] [INFO] [ddl.go:384] [&quot;[ddl] DDL closed&quot;] [ID=d57b89e9-b1c0-45a1-9659-becd4249eed3] [&quot;take time&quot;=198.806392ms]
+[2021/12/13 01:12:13.021 +08:00] [INFO] [ddl.go:297] [&quot;[ddl] stop DDL&quot;] [ID=d57b89e9-b1c0-45a1-9659-becd4249eed3]
+[2021/12/13 01:12:13.026 +08:00] [INFO] [domain.go:442] [&quot;infoSyncerKeeper exited.&quot;]
+[2021/12/13 01:12:13.027 +08:00] [INFO] [domain.go:612] [&quot;domain closed&quot;] [&quot;take time&quot;=203.963708ms]
+[2021/12/13 01:12:13.027 +08:00] [INFO] [collector.go:61] [&quot;Full backup Success summary: total backup ranges: 16901, total success: 16901, total failed: 0, total take(s): 6157.47, total size(MB): 4200646.35, avg speed(MB/s): 682.20,total kv: 47292061388&quot;] [&quot;backup checksum&quot;=7m4.429579554s] [&quot;backup fast checksum&quot;=6.692480306s] [&quot;backup total regions&quot;=55387] [BackupTS=429738563201400858] [Size=637484128247]
+</code></pre>
+<p>升级后 BR (v5.3.0 )备份日志</p>
+<pre><code class="language-SQL">[2021/12/30 22:02:02.197 +08:00] [INFO] [info.go:49] [&quot;Welcome to Backup &amp; Restore (BR)&quot;] [release-version=v5.3.0] [git-hash=4a1b2e9fe5b5afb1068c56de47adb07098d768d6] [git-branch=heads/refs/tags/v5.3.0] [go-version=go1.16.4] [utc-build-time=&quot;2021-11-24 13:31:09&quot;] [race-enabled=false]
+[2021/12/30 22:02:02.197 +08:00] [INFO] [common.go:630] [arguments] [__command=&quot;br backup full&quot;] [log-file=backup_full.log] [pd=&quot;[172.16.5.225:2379,172.16.5.226:2379,172.16.5.227:2379]&quot;] [ratelimit=200] [storage=local:///dbbak/tidbFullBak/mg_tidb_full_20211230220202]
+[2021/12/30 22:02:02.197 +08:00] [INFO] [conn.go:244] [&quot;new mgr&quot;] [pdAddrs=172.16.5.225:2379,172.16.5.226:2379,172.16.5.227:2379]
+[2021/12/30 22:02:02.199 +08:00] [INFO] [client.go:352] [&quot;[pd] create pd client with endpoints&quot;] [pd-address=&quot;[172.16.5.225:2379,172.16.5.226:2379,172.16.5.227:2379]&quot;]
+[2021/12/30 22:02:02.201 +08:00] [INFO] [base_client.go:349] [&quot;[pd] switch leader&quot;] [new-leader=http://172.16.5.226:2379] [old-leader=][2021/12/30 22:02:02.201 +08:00] [INFO] [base_client.go:104] [&quot;[pd] init cluster id&quot;] [cluster-id=6857095228536967924]
+[2021/12/30 22:02:02.201 +08:00] [INFO] [client.go:648] [&quot;[pd] tso dispatcher created&quot;] [dc-location=global]
+[2021/12/30 22:02:02.203 +08:00] [INFO] [conn.go:219] [&quot;checked alive KV stores&quot;] [aliveStores=9] [totalStores=9]
+[2021/12/30 22:02:02.203 +08:00] [INFO] [client.go:352] [&quot;[pd] create pd client with endpoints&quot;] [pd-address=&quot;[172.16.5.225:2379,172.16.5.226:2379,172.16.5.227:2379]&quot;]
+[2021/12/30 22:02:02.204 +08:00] [INFO] [base_client.go:349] [&quot;[pd] switch leader&quot;] [new-leader=http://172.16.5.226:2379] [old-leader=][2021/12/30 22:02:02.205 +08:00] [INFO] [base_client.go:104] [&quot;[pd] init cluster id&quot;] [cluster-id=6857095228536967924]
+[2021/12/30 22:02:02.205 +08:00] [INFO] [client.go:648] [&quot;[pd] tso dispatcher created&quot;] [dc-location=global]
+[2021/12/30 22:02:02.206 +08:00] [INFO] [client.go:93] [&quot;new backup client&quot;]
+.......
+[2021/12/31 03:31:47.083 +08:00] [ERROR] [client.go:752] [&quot;[pd] fetch pending tso requests error&quot;] [dc-location=global] [error=&quot;[PD:client:ErrClientGetTSO]context canceled: context canceled&quot;] [stack=&quot;github.com/tikv/pd/client.(*client).handleDispatcher\n\t/nfs/cache/mod/github.com/tikv/pd@v1.1.0-beta.0.20211104095303-69c86d05d379/client/client.go:752&quot;]
+[2021/12/31 03:31:47.083 +08:00] [INFO] [client.go:666] [&quot;[pd] exit tso dispatcher&quot;] [dc-location=global]
+[2021/12/31 03:31:47.084 +08:00] [ERROR] [client.go:752] [&quot;[pd] fetch pending tso requests error&quot;] [dc-location=global] [error=&quot;[PD:client:ErrClientGetTSO]context canceled: context canceled&quot;] [stack=&quot;github.com/tikv/pd/client.(*client).handleDispatcher\n\t/nfs/cache/mod/github.com/tikv/pd@v1.1.0-beta.0.20211104095303-69c86d05d379/client/client.go:752&quot;]
+[2021/12/31 03:31:47.084 +08:00] [INFO] [client.go:666] [&quot;[pd] exit tso dispatcher&quot;] [dc-location=global]
+[2021/12/31 03:31:47.084 +08:00] [INFO] [collector.go:66] [&quot;Full backup success summary&quot;] [total-ranges=59720] [ranges-succeed=59720] [ranges-failed=0] [backup-checksum=11m11.760918579s] [backup-fast-checksum=348.085778ms] [backup-total-ranges=17057] [total-take=5h29m44.887146372s] [BackupTS=430144991341838386] [total-kv=24978943921] [total-kv-size=2.321TB] [average-speed=117.3MB/s] [backup-data-size(after-compressed)=679.6GB] [Size=679630218545]
+</code></pre>
+<p>（1）是否跟日志报错有关</p>
+<p>升级后，日志有如下报错信息：</p>
+<pre><code class="language-SQL">[2021/12/31 03:31:47.084 +08:00] [ERROR] [client.go:752] [&quot;[pd] fetch pending tso requests error&quot;] [dc-location=global] [error=&quot;[PD:client:ErrClientGetTSO]context canceled: context canceled&quot;] [stack=&quot;github.com/tikv/pd/client.(*client).handleDispatcher\n\t/nfs/cache/mod/github.com/tikv/pd@v1.1.0-beta.0.20211104095303-69c86d05d379/client/client.go:752&quot;]
+</code></pre>
+<p>原因是：备份完成后，通过 PD 来启动 GC safepoint (备份过程中 GC safepoint 是停掉的)，备份完成 context cancel 引起的这个 ERROR，后续版本会优化相关日志和逻辑。</p>
+<p>Bug 详情请见：https://github.com/pingcap/tidb/issues/31335</p>
+<p>（2）是否跟备份文件大小有关</p>
+<p>升级前备份文件大小是 total size(MB): 4200646.35，升级后备份文件大小是 total-kv-size=2.321TB，不但没增大，反而减小了，可能有以下几种原因：</p>
+<p>(a)是否集群数据量减小导致</p>
+<p>通过分析集群监控未发现数据量有明显变化。</p>
+<p>(b)是否和备份文件压缩有关</p>
+<p>升级前的 v4.0.4 版本已经开启压缩，因此和压缩无关。</p>
+<p>(c)是否是日志显示问题</p>
+<p>这个问题是日志显示的 bug，在 v4.0.5 版本已修复。原因是：在备份日志中重复计算备份文件大小导致的，第一次在 BackupRange 中，第二次在 checksum 中，应该删除第二次，并不是每个备份任务都带有 checksum。</p>
+<p>Bug 详情请见：https://github.com/pingcap/br/issues/470</p>
+<p>（3）是否跟限速有关</p>
+<p>升级前：avg speed (MB/s): 682.20       # v4.0.4 版本</p>
+<p>升级后：average-speed=117.3MB/s     # v5.3.0 版本</p>
+<p>用户共计 10 个 TiKV 节点，单个 TiKV 的平均备份速度(avg speed / 10)都没有超过 ratelimit 200 的上限，且平均备份速度差异很大。需要进行下面两种场景的验证：</p>
+<p>(a)验证限速的影响</p>
+<p>可以对比升级前后的备份资源使用率(主要是 CPU)：在 Backup &amp; Import -- Backup -- Backup CPU Utilization(各个版本略有不同)。用户未提供监控，无法确认。</p>
+<p>(b)取消限速的情况</p>
+<p>用户尝试取消限速后，备份耗时恢复到升级之前的时间，最终确认是限速导致的问题。为了避免 ratelimit 限速失败，当配置 ratelimit 时，会将 concurrency 参数从 4 修改为 1（并且配置 ratelimit 时，concurrency 参数无法配置，默认为 1）进而降低了备份大量表的速度。</p>
+<p>Bug 详情请见：https://github.com/pingcap/br/issues/1007</p>
+<p>升级后备份变慢的分析流程图如下：</p>
+<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=Y2Q1MjA1ODA3OWVmNzg2ZmUzMjg5N2VjOTZlYWMwMGJfWDVvTEIyQm5JNENDenJuQnh3VU1rbXA1dW56TXpqQW9fVG9rZW46Ym94Y25iRHlETEtzblFkZWdVNVpxcERmelhnXzE2NTAxNjI5ODc6MTY1MDE2NjU4N19WNA" alt="img" /></p>
+<h2 id="问题结论"><a class="header" href="#问题结论">问题结论</a></h2>
+<ul>
+<li>BR 日志有报错信息</li>
+</ul>
+<p>日志报错信息对备份没影响。</p>
+<p>原因是：备份完成后，通过 PD 来启动 GC safepoint (备份过程中 GC safepoint 是停掉的)，备份完成 context cancel 引起的这个 ERROR，后续版本会优化相关日志和逻辑。</p>
+<p>Bug 详情请见：https://github.com/pingcap/tidb/issues/31335</p>
+<ul>
+<li>BR 日志显示备份文件大幅减小</li>
+</ul>
+<p>这个问题是 bug 导致，在 v4.0.5 版本已修复。原因是：在备份日志中重复计算备份文件大小导致的，第一次在 BackupRange 中，第二次在 checksum 中，应该删除第二次，并不是每个备份任务都带有 checksum。</p>
+<p>Bug 详情请见：https://github.com/pingcap/br/issues/470</p>
+<ul>
+<li>BR 备份耗时增加一倍多</li>
+</ul>
+<p>备份耗时增加是因为用户使用 BR 进行备份时启用了限速(ratelimit)，导致：为了避免 ratelimit 限速失败，当配置 ratelimit 时，会将 concurrency 参数从 4 修改为 1（并且配置 ratelimit 时，concurrency 参数无法配置，默认为 1）进而降低了备份大量表的速度。</p>
+<p>Bug 详情请见：https://github.com/pingcap/br/issues/1007</p>
+<h2 id="优化措施"><a class="header" href="#优化措施">优化措施</a></h2>
+<p>为了减少备份任务对在线集群的影响，从 TiDB v5.4.0 起，BR 引入了自动调节功能，此功能会默认开启。在集群资源占用率较高的情况下，BR 可以通过该功能自动限制备份使用的资源，从而减少对集群的影响。</p>
+<p>需要注意的是，v5.3.x 版本的集群，在升级到 v5.4.0 及以上版本后，自动调节功能默认关闭，需手动开启，动态启动或停止 BR 自动调节功能命令如下：</p>
+<pre><code class="language-SQL">tikv-ctl modify-tikv-config -n backup.enable-auto-tune -v &lt;true|false&gt;
+</code></pre>
+<p>详情请见官网文档：https://docs.pingcap.com/zh/tidb/stable/br-auto-tune</p>
+<h2 id="相关知识"><a class="header" href="#相关知识">相关知识</a></h2>
+<ul>
+<li>BR 支持备份文件压缩</li>
+</ul>
+<p>v4.0.3 版本开始支持备份文件压缩，压缩完整的支持是在 v4.0.5。</p>
+<ul>
+<li>BR 限速 Bug</li>
+</ul>
+<p>在小于等于 v4.0.13 版本中存在一个限速无法正确执行的 bug，在 v4.0.14 版本修复。</p>
+<ul>
+<li>BR 参数 ratelimit 和 concurrency 问题</li>
+</ul>
+<p>为了避免 ratelimit 限速失败，当配置 ratelimit 时，会将 concurrency 参数从 4 修改为 1 (并且配置 ratelimit 时，concurrency 参数无法配置，默认为 1)。</p>
+<h2 id="参考"><a class="header" href="#参考">【参考】</a></h2>
+<p>https://asktug.com/t/topic/303447/11</p>
+<p>https://docs.pingcap.com/zh/tidb/stable/br-auto-tune/</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../tidb-202202/failure-analysis/failure-analysis.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../../tidb-202202/failure-analysis/2-ticdc.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../tidb-202202/failure-analysis/failure-analysis.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../../tidb-202202/failure-analysis/2-ticdc.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
