@@ -174,7 +174,7 @@
 <ol>
 <li>系统表 mysql.tidb</li>
 </ol>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=NGQ3ZjE3NGJiYmY1YmFkNDFmNWE0ZDM1NzQ1NzJhNGFfcGF0aTBEcFNCUWliTGNUZ2tSYUg3aHVGZTdER1RmZ0pfVG9rZW46Ym94Y25hVVgyVDFIWnhXNjZZRUxjd0ltcFJjXzE2NTAxNjQ3MTE6MTY1MDE2ODMxMV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/c/1/c/c1c36dacede413af8f956df929eb87eebe1951f8.jpeg" alt="img" /></p>
 <p>以 tikv_gc 开头的变量都与 GC 相关，其中 tikv_gc_leader_uuid/tikv_gc_leader_desc/tikv_gc_leader_lease 用于记录 GC leader 的状态，tikv_gc_safe_point 和 tikv_gc_last_run_time 在每轮 GC 开始前会被自动更新，其他几个变量则是可配置的，详见 <a href="https://docs.pingcap.com/zh/tidb/stable/garbage-collection-configuration">GC 配置</a>。</p>
 <p><strong>注意</strong>：从 5.0 开始建议通过 set 变量的方式来设置 tidb_gc_life_time 等参数，而不是直接修改 update mysql.tidb，避免修改成错误格式的参数导致 GC 不正常。</p>
 <ol>
@@ -191,7 +191,7 @@
 <li>&quot;service_gc_safe_points&quot;: gc_worker/ticdc/br/dumpling 等各 service 记录的 safe point。</li>
 <li>&quot;gc_safe_point&quot;: 用于通知 TiKV 进行 Do GC 的 safe point，该 safe point 不保证在此时间之后的数据可以安全读取。</li>
 </ul>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=N2IzZmY2M2UxNWY1YTYxYTczYzA1MWNhMGQ2ZTA4ZjFfRjFmSlgyUmV1R2RVSXNFODVVRHVRelpyUWJ2Tmhlc0NfVG9rZW46Ym94Y25HOW1HTGs0V0dudEFXbmNzekZiTVJmXzE2NTAxNjQ3MTE6MTY1MDE2ODMxMV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/e/b/f/ebf1fdbcb49e2b1b9c0ac0c8586e516bc08d87d2.jpeg" alt="img" /></p>
 <h2 id="如何判断-gc-所在阶段"><a class="header" href="#如何判断-gc-所在阶段"><strong>如何判断 GC 所在阶段</strong></a></h2>
 <p>GC 分为 Resolve Locks, Delete Ranges 和 Do GC 三个阶段。</p>
 <p>Resolve Locks 阶段：在 TiKV 一侧会产生大量的 scan_lock 请求，可以在 gRPC 相关的 metrics 中观察到。scan_lock 请求会对全部的 Region 调用。</p>

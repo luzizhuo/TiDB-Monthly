@@ -151,9 +151,9 @@
 <p>[2022/01/30 11:17:55.761 +08:00] [WARN] [region_worker.go:377] [&quot;region not receiving resolved event from tikv or resolved ts is not pushing for too long time, try to resolve lock&quot;] [regionID=40982339] [span=&quot;[7480000000000016ffa05f72f000000019ff3a9b7b0000000000fa, 7480000000000016ffa05f72f000000019ff7319ad0000000000fa)&quot;] [duration=17m21.65s] [lastEvent=93.273628ms] [resolvedTs=430836713476849684]</p>
 <p>[2022/01/30 11:17:55.771 +08:00] [WARN] [region_worker.go:743] [&quot;The resolvedTs is fallen back in kvclient&quot;] [&quot;Event Type&quot;=RESOLVED] [resolvedTs=430836713699672811] [lastResolvedTs=430836984350245604] [regionID=31134532]</p>
 <p>TiDB server oom监控</p>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=NjQ4OTJiYWM2NjdiYzg1Y2M2ZDdlMjk3ZDIyMGVmYzBfcUJ0YlJvRFExUEJwRnE2MzN3TUdIZW5uUlM3eDFLRzdfVG9rZW46Ym94Y25LajFxUFhiNXBBSGdXVHQ2NTJqbW9iXzE2NTAxNjM4NjU6MTY1MDE2NzQ2NV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/b/0/b/b0b230685c228b59e2efa6bed04e37928576bbdf.png" alt="img" /></p>
 <p>Tidb cdc监控</p>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=NGM1NTk5NzJhMGY5YmE1ZWU5OGRlYzIyM2M2ODkwNWVfOTdieDg2UTZQdjEzUURNbkQwd1hsZnBKSE1WY0hJaUZfVG9rZW46Ym94Y252OENzelRJZlJZWGx0TjJTcWlKTXJiXzE2NTAxNjM4NjU6MTY1MDE2NzQ2NV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/2/0/5/205843a7a9d85607f2b4686ec4aa46a6647b56ae.png" alt="img" /></p>
 <h2 id="问题排查"><a class="header" href="#问题排查">问题排查</a></h2>
 <h3 id="tidb-server--oom原因排查"><a class="header" href="#tidb-server--oom原因排查">TiDB server  oom原因排查</a></h3>
 <p>从相关慢查询中</p>
@@ -165,14 +165,14 @@
 <li>在查询时选择时间范围选小一点，比如一小时以内，并尽量避免多人并发查询 slow query 。</li>
 <li>查询时尽量不要使用order by排序功能。</li>
 </ul>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=MTgxYjczMmNkZGYxOWZmMDYzY2Y4YWMwNmI5NjAxMTNfUkNuTlVaWk84RmVGeEVIeVBHV0VaNGlHQnlBQkJWQUpfVG9rZW46Ym94Y25Mdjd2NmdVQ3I4M284aHN3TFBxb1RjXzE2NTAxNjM4NjU6MTY1MDE2NzQ2NV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/e/8/b/e8bfda7e8ffbf112d499da8036cfd54e729676b4.png" alt="img" /></p>
 <p>目前tidb在分析oom问题上提供了一个oom tracker工具，能将当时的top memory sql以及heap统计到tidb server的tmp目录下以供分析，较以前版本来说，排查问题相对简单容易很多。</p>
 <h3 id="ticdc-问题排查"><a class="header" href="#ticdc-问题排查">TiCDC 问题排查</a></h3>
 <p>从监控中可以看到，在tidb server oom后，部分tikv节点中resolved-lag增大</p>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=NjcyMWM3NGUzNjA5MTA2NmM0ZjQ4NDMyODc0MDVlZTJfTkVVbkZpcXVIWnN1TXBVNW1HUUdtaTFQZWhaSFFVYnZfVG9rZW46Ym94Y25ZOVpPb0E5c0pYWDJWcjZENERXbGlnXzE2NTAxNjM4NjU6MTY1MDE2NzQ2NV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/c/c/0/cc0a0e361cea8be00ef38525a4e5895e406828b2.jpeg" alt="img" /></p>
 <p>通过cdc研发人员确认，tidb在事务中对相关表加乐观或悲观锁，当tidb server  oom后，相关锁未正常释放，且region merge会阻塞resolveLock功能，导致lock无法释放</p>
 <p>在最新的5.1.4版本中，已经修复了该问题</p>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=NzI5Yjk0ZDJlZWVhNzYzY2JjNmYyNDU1ZTE5ZThjOGJfUXJWd1dEUHh5Tm45M1BWMTFqQm1kVEdNSDlZdlhIMGJfVG9rZW46Ym94Y25pRUtUc2NPQjN5Vmh2NlVhcEJBUFdiXzE2NTAxNjM4NjU6MTY1MDE2NzQ2NV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/0/e/a/0ea6a601299a34a656f54cd570fb59e312e2509c.png" alt="img" /></p>
 <h2 id="问题处理"><a class="header" href="#问题处理">问题处理</a></h2>
 <h3 id="514版本及之后版本"><a class="header" href="#514版本及之后版本">5.1.4版本及之后版本</a></h3>
 <p>tidb server oom后cdc进程checkpointTs 不向前推进问题可以得到解决，不需要特别进行处理。</p>

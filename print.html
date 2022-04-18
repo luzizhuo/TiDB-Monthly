@@ -249,7 +249,7 @@
 <p>用户尝试取消限速后，备份耗时恢复到升级之前的时间，最终确认是限速导致的问题。为了避免 ratelimit 限速失败，当配置 ratelimit 时，会将 concurrency 参数从 4 修改为 1（并且配置 ratelimit 时，concurrency 参数无法配置，默认为 1）进而降低了备份大量表的速度。</p>
 <p>Bug 详情请见：https://github.com/pingcap/br/issues/1007</p>
 <p>升级后备份变慢的分析流程图如下：</p>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=Y2Q1MjA1ODA3OWVmNzg2ZmUzMjg5N2VjOTZlYWMwMGJfWDVvTEIyQm5JNENDenJuQnh3VU1rbXA1dW56TXpqQW9fVG9rZW46Ym94Y25iRHlETEtzblFkZWdVNVpxcERmelhnXzE2NTAxNjI5ODc6MTY1MDE2NjU4N19WNA" alt="img" /></p>
+<p><img src="https://tidb-blog.oss-cn-beijing.aliyuncs.com/media/65638c5b-7ee7-4432-8f32-df5441f6322b-1650285626203.png" alt="img" /></p>
 <h2 id="问题结论"><a class="header" href="#问题结论">问题结论</a></h2>
 <ul>
 <li>BR 日志有报错信息</li>
@@ -303,9 +303,9 @@
 <p>[2022/01/30 11:17:55.761 +08:00] [WARN] [region_worker.go:377] [&quot;region not receiving resolved event from tikv or resolved ts is not pushing for too long time, try to resolve lock&quot;] [regionID=40982339] [span=&quot;[7480000000000016ffa05f72f000000019ff3a9b7b0000000000fa, 7480000000000016ffa05f72f000000019ff7319ad0000000000fa)&quot;] [duration=17m21.65s] [lastEvent=93.273628ms] [resolvedTs=430836713476849684]</p>
 <p>[2022/01/30 11:17:55.771 +08:00] [WARN] [region_worker.go:743] [&quot;The resolvedTs is fallen back in kvclient&quot;] [&quot;Event Type&quot;=RESOLVED] [resolvedTs=430836713699672811] [lastResolvedTs=430836984350245604] [regionID=31134532]</p>
 <p>TiDB server oom监控</p>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=NjQ4OTJiYWM2NjdiYzg1Y2M2ZDdlMjk3ZDIyMGVmYzBfcUJ0YlJvRFExUEJwRnE2MzN3TUdIZW5uUlM3eDFLRzdfVG9rZW46Ym94Y25LajFxUFhiNXBBSGdXVHQ2NTJqbW9iXzE2NTAxNjM4NjU6MTY1MDE2NzQ2NV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/b/0/b/b0b230685c228b59e2efa6bed04e37928576bbdf.png" alt="img" /></p>
 <p>Tidb cdc监控</p>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=NGM1NTk5NzJhMGY5YmE1ZWU5OGRlYzIyM2M2ODkwNWVfOTdieDg2UTZQdjEzUURNbkQwd1hsZnBKSE1WY0hJaUZfVG9rZW46Ym94Y252OENzelRJZlJZWGx0TjJTcWlKTXJiXzE2NTAxNjM4NjU6MTY1MDE2NzQ2NV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/2/0/5/205843a7a9d85607f2b4686ec4aa46a6647b56ae.png" alt="img" /></p>
 <h2 id="问题排查"><a class="header" href="#问题排查">问题排查</a></h2>
 <h3 id="tidb-server--oom原因排查"><a class="header" href="#tidb-server--oom原因排查">TiDB server  oom原因排查</a></h3>
 <p>从相关慢查询中</p>
@@ -317,14 +317,14 @@
 <li>在查询时选择时间范围选小一点，比如一小时以内，并尽量避免多人并发查询 slow query 。</li>
 <li>查询时尽量不要使用order by排序功能。</li>
 </ul>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=MTgxYjczMmNkZGYxOWZmMDYzY2Y4YWMwNmI5NjAxMTNfUkNuTlVaWk84RmVGeEVIeVBHV0VaNGlHQnlBQkJWQUpfVG9rZW46Ym94Y25Mdjd2NmdVQ3I4M284aHN3TFBxb1RjXzE2NTAxNjM4NjU6MTY1MDE2NzQ2NV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/e/8/b/e8bfda7e8ffbf112d499da8036cfd54e729676b4.png" alt="img" /></p>
 <p>目前tidb在分析oom问题上提供了一个oom tracker工具，能将当时的top memory sql以及heap统计到tidb server的tmp目录下以供分析，较以前版本来说，排查问题相对简单容易很多。</p>
 <h3 id="ticdc-问题排查"><a class="header" href="#ticdc-问题排查">TiCDC 问题排查</a></h3>
 <p>从监控中可以看到，在tidb server oom后，部分tikv节点中resolved-lag增大</p>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=NjcyMWM3NGUzNjA5MTA2NmM0ZjQ4NDMyODc0MDVlZTJfTkVVbkZpcXVIWnN1TXBVNW1HUUdtaTFQZWhaSFFVYnZfVG9rZW46Ym94Y25ZOVpPb0E5c0pYWDJWcjZENERXbGlnXzE2NTAxNjM4NjU6MTY1MDE2NzQ2NV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/c/c/0/cc0a0e361cea8be00ef38525a4e5895e406828b2.jpeg" alt="img" /></p>
 <p>通过cdc研发人员确认，tidb在事务中对相关表加乐观或悲观锁，当tidb server  oom后，相关锁未正常释放，且region merge会阻塞resolveLock功能，导致lock无法释放</p>
 <p>在最新的5.1.4版本中，已经修复了该问题</p>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=NzI5Yjk0ZDJlZWVhNzYzY2JjNmYyNDU1ZTE5ZThjOGJfUXJWd1dEUHh5Tm45M1BWMTFqQm1kVEdNSDlZdlhIMGJfVG9rZW46Ym94Y25pRUtUc2NPQjN5Vmh2NlVhcEJBUFdiXzE2NTAxNjM4NjU6MTY1MDE2NzQ2NV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/0/e/a/0ea6a601299a34a656f54cd570fb59e312e2509c.png" alt="img" /></p>
 <h2 id="问题处理"><a class="header" href="#问题处理">问题处理</a></h2>
 <h3 id="514版本及之后版本"><a class="header" href="#514版本及之后版本">5.1.4版本及之后版本</a></h3>
 <p>tidb server oom后cdc进程checkpointTs 不向前推进问题可以得到解决，不需要特别进行处理。</p>
@@ -346,19 +346,19 @@
 <h2 id="问题现象-1"><a class="header" href="#问题现象-1">问题现象</a></h2>
 <p>SQL：SELECT count(*) FROM (SELECT DISTINCT t1.uid FROM cdp_crm_uid_detail_basic t1 WHERE (t1.message_locale IN ( 'en-ie', 'en-us','ms-my','en-ae','en-my','en-au','ja-jp', 'de-de', 'zh-hk' ) AND flt_ord_num_s IS NULL AND htl_ord_num_s IS NULL) OR ( t1.message_locale = 'ru-ru' AND       flt_ord_num_s IS NULL AND htl_ord_num_s IS NULL AND t1.edm_discounts_subscribe = 1)) a;</p>
 <p>Set tidb_isolation_read_engines='tidb,tikv,tiflash'时，执行计划会使用streamAgg</p>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=ZGVkNzMxZDcyMGEyNjNjYjUzMzA1YTlmOTk0NGI0OTNfVVdCVW96djI5OHNuWmVBT1Btc1g3bU1hTEVRSVpRNU5fVG9rZW46Ym94Y25nM29FMXpyNlpWWVFWUmVWOXpnekpiXzE2NTAxNjQwMTk6MTY1MDE2NzYxOV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/2/5/8/258f7efb6863486dee778a8282f0d14a8641aaa8.png" alt="img" /></p>
 <p>Set tidb_isolation_read_engines='tidb,tiflash'时，SQL 执行计划还走 tiflash 引擎，但算子变成了 hashagg ，耗时明显增加，内存开销非常高，甚至会导致 tidb 发生 OOM ，变化后的执行计划如下：</p>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=OTNjMGE3MTg2ZGZmNjRhMDk0NThhNTkwOTIwNDAyZmVfaUR5QlFWZGVwMlV4dWZJUkUyZngwMWxVVE9va01yQXpfVG9rZW46Ym94Y25TZHpIQU9ZQW5pVU1sZ1B2OHdsakxmXzE2NTAxNjQwMTk6MTY1MDE2NzYxOV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/a/3/8/a3830277cf48382ed659f7c0a5328815a55a6db3.png" alt="img" /></p>
 <p>虽然表的健康度只有 67，但 SQL 只走 tiflash 引擎，应该跟 tikv 本身没有关系才对，不太理解为何调整变量 tidb_isolation_read_engines 会导致优化器的评估出现差异？</p>
 <h2 id="原因分析"><a class="header" href="#原因分析">原因分析</a></h2>
 <p>TiFlash支持的<a href="https://docs.pingcap.com/zh/tidb/v5.1/use-tiflash#tiflash-%E6%94%AF%E6%8C%81%E7%9A%84%E8%AE%A1%E7%AE%97%E4%B8%8B%E6%8E%A8">下推算子</a>中可以确认不带<code>GROUP BY</code> 条件的列可以进入下推：</p>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=YzFjMDdjOTI4ZDkzNDc2NTkxMjBhOTRkYjYxZjJjNDFfMURYNnVxaTBVNmJvTVh6NlN0OHV4cDJJdEhQaGdvRUhfVG9rZW46Ym94Y25JWUVLREhYaW8zRUx1RHNieTl0UTNkXzE2NTAxNjQwMTk6MTY1MDE2NzYxOV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/4/c/2/4c27391e3eb644f020a9f18b89b240d5f37a4d19.png" alt="img" /></p>
 <p>可见案例中的steamAgg在默认情况下是支持下推到tiflash的，但从session变量tidb_isolation_read_engines中去除了tikv之后，下推入口是否被挡住了。查看执行计划生成源码https://github.com/pingcap/tidb/blob/v5.1.1/planner/core/exhaust_physical_plans.go#L2362 可以确认当datasource不再有 tikv access path时会变为RootTask，RootTaskType 最终会生成不下推 agg 的计划；</p>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=MDhlM2E4Y2YyMDM4MmM3NGI0ZDc2ZWM2ZDUzNDlhMmFfRk1jaWF6SHdWc2JXWmNGVkp5M25FaTNjaFc5SVV2blBfVG9rZW46Ym94Y241SUY1bURhelFTd2N3a2VxOHpYenJnXzE2NTAxNjQwMTk6MTY1MDE2NzYxOV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/5/2/c/52ce6f8ce1ed33f118325efe61043237e0998ad9.png" alt="img" /></p>
 <p>但在执行计划生成时，hashagg和streamAgg都会分别计算其下方算子子树生成何种类型的task：</p>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=NGIxYWQ0NjNkOTM4N2NkNGY1NzRiYWJhOTE0ZGNhZDNfWTZoS3dhc1ZCeVNDUHZWem9PM0c5M29nbDBHTXAwWnJfVG9rZW46Ym94Y25NclVwbVI0TWtrWjltVzJMdGU4U2ZnXzE2NTAxNjQwMTk6MTY1MDE2NzYxOV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/4/7/4/47477ad9c99d9493517b83b925895b6133b34851.png" alt="img" /></p>
 <p>在hashAgg方法中，虽然也会受到session变量的影响，但下推tiflash的local read代价更低，因此会加入到CopTiFlashLocalReadTaskType中，https://github.com/pingcap/tidb/blob/v5.1.1/planner/core/exhaust_physical_plans.go#L2541，所以最终整个SQL在修改tidb_isolation_read_engines使用了hashAgg算子。</p>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=NDJhYmFhZDAyNTg0Yzc3MjcwZDgzNDUyNTg4NGVhZGFfWnJzTHVJOEJiNHdidTFTV09EQW1LQXBKR3ZwTDNFbEtfVG9rZW46Ym94Y25abk1XZ0hxb1F4cWZOQ2N1alYxeEdkXzE2NTAxNjQwMTk6MTY1MDE2NzYxOV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/9/a/a/9aaa32c1a3ab6a6855d516b9b33f883c7352cecc.png" alt="img" /></p>
 <h2 id="优化方案"><a class="header" href="#优化方案">优化方案</a></h2>
 <p>影响版本：v5.0+,v5.1+,v5.2+,v5.3+,v5.4+</p>
 <p>目前master分支已修复Bug：https://github.com/pingcap/tidb/pull/32336</p>
@@ -496,7 +496,7 @@
 <ol>
 <li>系统表 mysql.tidb</li>
 </ol>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=NGQ3ZjE3NGJiYmY1YmFkNDFmNWE0ZDM1NzQ1NzJhNGFfcGF0aTBEcFNCUWliTGNUZ2tSYUg3aHVGZTdER1RmZ0pfVG9rZW46Ym94Y25hVVgyVDFIWnhXNjZZRUxjd0ltcFJjXzE2NTAxNjQ3MTE6MTY1MDE2ODMxMV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/c/1/c/c1c36dacede413af8f956df929eb87eebe1951f8.jpeg" alt="img" /></p>
 <p>以 tikv_gc 开头的变量都与 GC 相关，其中 tikv_gc_leader_uuid/tikv_gc_leader_desc/tikv_gc_leader_lease 用于记录 GC leader 的状态，tikv_gc_safe_point 和 tikv_gc_last_run_time 在每轮 GC 开始前会被自动更新，其他几个变量则是可配置的，详见 <a href="https://docs.pingcap.com/zh/tidb/stable/garbage-collection-configuration">GC 配置</a>。</p>
 <p><strong>注意</strong>：从 5.0 开始建议通过 set 变量的方式来设置 tidb_gc_life_time 等参数，而不是直接修改 update mysql.tidb，避免修改成错误格式的参数导致 GC 不正常。</p>
 <ol>
@@ -513,7 +513,7 @@
 <li>&quot;service_gc_safe_points&quot;: gc_worker/ticdc/br/dumpling 等各 service 记录的 safe point。</li>
 <li>&quot;gc_safe_point&quot;: 用于通知 TiKV 进行 Do GC 的 safe point，该 safe point 不保证在此时间之后的数据可以安全读取。</li>
 </ul>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=N2IzZmY2M2UxNWY1YTYxYTczYzA1MWNhMGQ2ZTA4ZjFfRjFmSlgyUmV1R2RVSXNFODVVRHVRelpyUWJ2Tmhlc0NfVG9rZW46Ym94Y25HOW1HTGs0V0dudEFXbmNzekZiTVJmXzE2NTAxNjQ3MTE6MTY1MDE2ODMxMV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/e/b/f/ebf1fdbcb49e2b1b9c0ac0c8586e516bc08d87d2.jpeg" alt="img" /></p>
 <h2 id="如何判断-gc-所在阶段"><a class="header" href="#如何判断-gc-所在阶段"><strong>如何判断 GC 所在阶段</strong></a></h2>
 <p>GC 分为 Resolve Locks, Delete Ranges 和 Do GC 三个阶段。</p>
 <p>Resolve Locks 阶段：在 TiKV 一侧会产生大量的 scan_lock 请求，可以在 gRPC 相关的 metrics 中观察到。scan_lock 请求会对全部的 Region 调用。</p>
@@ -764,7 +764,7 @@ option: -i --input-file [input_csv_path] | | 需要处理的csv文件路径;
 <ol>
 <li>TiDB 监控的 GC - Delete Range Failure OPM 中有持续的 send 失败，如图：</li>
 </ol>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=MjNkY2IyNTM1MmFiOWFlODM3MTdmZmU5YWZhYWQ5ZmFfbVRRd0lUQUVlNlRuRFNEemg4UVZqcGVPbHVkdnFxRElfVG9rZW46Ym94Y25zYUEzbnZGb1dJSXcxUWhZSVdSU1kxXzE2NTAxNjU4MDE6MTY1MDE2OTQwMV9WNA" alt="img" /></p>
+<p><img src="https://asktug.com/uploads/default/original/4X/d/d/2/dd242365e269f79e83a5abfc166e1aa24d710183.png" alt="img" /></p>
 <ol>
 <li>TiDB 日志中确认 Delete Range 错误原因是 &quot;gc worker is too busy&quot;</li>
 <li>从原理上再次确认，检查 TiKV 曾经出现过 GC worker 持续 CPU 100% 的状况。</li>

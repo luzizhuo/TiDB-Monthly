@@ -223,7 +223,7 @@
 <p>用户尝试取消限速后，备份耗时恢复到升级之前的时间，最终确认是限速导致的问题。为了避免 ratelimit 限速失败，当配置 ratelimit 时，会将 concurrency 参数从 4 修改为 1（并且配置 ratelimit 时，concurrency 参数无法配置，默认为 1）进而降低了备份大量表的速度。</p>
 <p>Bug 详情请见：https://github.com/pingcap/br/issues/1007</p>
 <p>升级后备份变慢的分析流程图如下：</p>
-<p><img src="https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=Y2Q1MjA1ODA3OWVmNzg2ZmUzMjg5N2VjOTZlYWMwMGJfWDVvTEIyQm5JNENDenJuQnh3VU1rbXA1dW56TXpqQW9fVG9rZW46Ym94Y25iRHlETEtzblFkZWdVNVpxcERmelhnXzE2NTAxNjI5ODc6MTY1MDE2NjU4N19WNA" alt="img" /></p>
+<p><img src="https://tidb-blog.oss-cn-beijing.aliyuncs.com/media/65638c5b-7ee7-4432-8f32-df5441f6322b-1650285626203.png" alt="img" /></p>
 <h2 id="问题结论"><a class="header" href="#问题结论">问题结论</a></h2>
 <ul>
 <li>BR 日志有报错信息</li>
