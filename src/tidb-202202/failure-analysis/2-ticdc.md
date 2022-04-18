@@ -28,11 +28,11 @@ Tidb server 发生oom后，ticdc checkpointTs 不向前推进，尝试pause  cha
 
 TiDB server oom监控
 
-![img](https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=NjQ4OTJiYWM2NjdiYzg1Y2M2ZDdlMjk3ZDIyMGVmYzBfcUJ0YlJvRFExUEJwRnE2MzN3TUdIZW5uUlM3eDFLRzdfVG9rZW46Ym94Y25LajFxUFhiNXBBSGdXVHQ2NTJqbW9iXzE2NTAxNjM4NjU6MTY1MDE2NzQ2NV9WNA)
+![img](https://asktug.com/uploads/default/original/4X/b/0/b/b0b230685c228b59e2efa6bed04e37928576bbdf.png)
 
 Tidb cdc监控
 
-![img](https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=NGM1NTk5NzJhMGY5YmE1ZWU5OGRlYzIyM2M2ODkwNWVfOTdieDg2UTZQdjEzUURNbkQwd1hsZnBKSE1WY0hJaUZfVG9rZW46Ym94Y252OENzelRJZlJZWGx0TjJTcWlKTXJiXzE2NTAxNjM4NjU6MTY1MDE2NzQ2NV9WNA)
+![img](https://asktug.com/uploads/default/original/4X/2/0/5/205843a7a9d85607f2b4686ec4aa46a6647b56ae.png)
 
 
 
@@ -52,7 +52,7 @@ dashboard的慢查询页面导致oom，从4.0版本到5.1.2版本，曾经多次
 - 在查询时选择时间范围选小一点，比如一小时以内，并尽量避免多人并发查询 slow query 。
 - 查询时尽量不要使用order by排序功能。
 
-![img](https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=MTgxYjczMmNkZGYxOWZmMDYzY2Y4YWMwNmI5NjAxMTNfUkNuTlVaWk84RmVGeEVIeVBHV0VaNGlHQnlBQkJWQUpfVG9rZW46Ym94Y25Mdjd2NmdVQ3I4M284aHN3TFBxb1RjXzE2NTAxNjM4NjU6MTY1MDE2NzQ2NV9WNA)
+![img](https://asktug.com/uploads/default/original/4X/e/8/b/e8bfda7e8ffbf112d499da8036cfd54e729676b4.png)
 
 
 
@@ -62,7 +62,7 @@ dashboard的慢查询页面导致oom，从4.0版本到5.1.2版本，曾经多次
 
 从监控中可以看到，在tidb server oom后，部分tikv节点中resolved-lag增大
 
-![img](https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=NjcyMWM3NGUzNjA5MTA2NmM0ZjQ4NDMyODc0MDVlZTJfTkVVbkZpcXVIWnN1TXBVNW1HUUdtaTFQZWhaSFFVYnZfVG9rZW46Ym94Y25ZOVpPb0E5c0pYWDJWcjZENERXbGlnXzE2NTAxNjM4NjU6MTY1MDE2NzQ2NV9WNA)
+![img](https://asktug.com/uploads/default/original/4X/c/c/0/cc0a0e361cea8be00ef38525a4e5895e406828b2.jpeg)
 
 
 
@@ -72,7 +72,7 @@ dashboard的慢查询页面导致oom，从4.0版本到5.1.2版本，曾经多次
 
 在最新的5.1.4版本中，已经修复了该问题
 
-![img](https://pingcap.feishu.cn/space/api/box/stream/download/asynccode/?code=NzI5Yjk0ZDJlZWVhNzYzY2JjNmYyNDU1ZTE5ZThjOGJfUXJWd1dEUHh5Tm45M1BWMTFqQm1kVEdNSDlZdlhIMGJfVG9rZW46Ym94Y25pRUtUc2NPQjN5Vmh2NlVhcEJBUFdiXzE2NTAxNjM4NjU6MTY1MDE2NzQ2NV9WNA)
+![img](https://asktug.com/uploads/default/original/4X/0/e/a/0ea6a601299a34a656f54cd570fb59e312e2509c.png)
 
 
 
